@@ -1,0 +1,461 @@
+---- pool Matches (597 in 4 files) ----
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_ERR,   MSG_MISPID,	PARAM_NONE,	"Missing pool id parameter" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_ERR,   MSG_INVPID,	PARAM_POOLMAX,	"Invalid pool id %d - range is 0 - %d" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_SUCC,  MSG_SWITCHP,	PARAM_POOL,	"Switching to pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_SUCC,  MSG_ENAPOOL,	PARAM_POOL,	"Enabling pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_SUCC,  MSG_DISPOOL,	PARAM_POOL,	"Disabling pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_ERR,   MSG_DISLASTP,PARAM_POOL,	"Cannot disable last active pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_SUCC,  MSG_ADDPOOL,	PARAM_STR,	"Added pool '%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_ERR,   MSG_REMLASTP,PARAM_POOL,	"Cannot remove last pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_ERR,   MSG_ACTPOOL, PARAM_POOL,	"Cannot remove active pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer): { SEVERITY_SUCC,  MSG_REMPOOL, PARAM_BOTH,	"Removed pool %d:'%s'" },
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool = pools[i];
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		switch (pool->enabled) {
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->idle)
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->hdr_path)
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_escape(root, "URL", pool->rpc_url, false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_int(root, "Priority", &(pool->prio), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_uint(root, "Getworks", &(pool->getwork_requested), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_int(root, "Accepted", &(pool->accepted), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_int(root, "Rejected", &(pool->rejected), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_uint(root, "Discarded", &(pool->discarded_work), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_uint(root, "Stale", &(pool->stale_shares), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_uint(root, "Get Failures", &(pool->getfail_occasions), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_uint(root, "Remote Failures", &(pool->remotefail_occasions), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_escape(root, "User", pool->rpc_user, false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		root = api_add_time(root, "Last Share Time", &(pool->last_share_time), false);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[id];
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->enabled = POOL_ENABLED;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	switch_pools(pool);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[id];
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->enabled == POOL_ENABLED) {
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->enabled = POOL_ENABLED;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->prio < current_pool()->prio)
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		switch_pools(pool);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[id];
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->enabled == POOL_DISABLED) {
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->enabled = POOL_DISABLED;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool == current_pool())
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[id];
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool == current_pool())
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool == current_pool()) {
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->enabled = POOL_DISABLED;
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	rpc_url = escape_string(pool->rpc_url, isjson);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (rpc_url != pool->rpc_url)
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):	remove_pool(pool);
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool = pools[j];
+Api.c (e:\jobs\code\cgminer2.4.4\cgminer):		i = itemstats(i, id, &(pool->cgminer_stats), &(pool->cgminer_pool_stats), NULL, isjson);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):struct pool **pools;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static struct pool *currentpool = NULL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool = work->pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	// timestamp,disposition,target,pool,dev,thr,sharehash,sharedata
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	rv = snprintf(s, sizeof(s), "%lu,%s,%s,%s,%s%u,%u,%s,%s\n", t, disposition, target, pool->rpc_url, cgpu->api->name, cgpu->device_id, thr_id, hash, data);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static struct pool *add_pool(void)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = calloc(sizeof(struct pool), 1);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (!pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		quit(1, "Failed to malloc pool in add_pool");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->pool_no = pool->prio = total_pools;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pools = realloc(pools, sizeof(struct pool *) * (total_pools + 2));
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pools[total_pools++] = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (unlikely(pthread_mutex_init(&pool->pool_lock, NULL)))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (unlikely(pthread_cond_init(&pool->cr_cond, NULL)))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	INIT_LIST_HEAD(&pool->curlring);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Make sure the pool doesn't think we've been idle since time 0 */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->tv_idle.tv_sec = ~0UL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	return pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static bool pool_tset(struct pool *pool, bool *var)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_lock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_unlock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):bool pool_tclear(struct pool *pool, bool *var)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_lock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_unlock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):struct pool *current_pool(void)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = currentpool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	return pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[total_urls - 1];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	opt_set_charp(arg, &pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->rpc_url = httpinput;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[total_users - 1];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	opt_set_charp(arg, &pool->rpc_user);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[total_passes - 1];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	opt_set_charp(arg, &pool->rpc_pass);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = pools[total_userpasses - 1];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	opt_set_charp(arg, &pool->rpc_userpass);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			"Don't leak work to backup pools when primary pool is lagging"),
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	OPT_WITHOUT_ARG("--no-pool-disable",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool = current_pool();
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->rpc_url, have_longpoll ? "": "out", pool->rpc_user);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool = work->pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	applog(LOG_DEBUG, "DBG: sending %s submit RPC call: %s", pool->rpc_url, sd);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	val = json_rpc_call(curl, pool->rpc_url, pool->rpc_userpass, s, false, false, &rolltime, pool, true);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (!pool_tset(pool, &pool->submit_fail)) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->remotefail_occasions++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, "Pool %d communication failure, caching submissions", pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	} else if (pool_tclear(pool, &pool->submit_fail))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "Pool %d communication resumed, submitting work", pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->accepted++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->seq_rejects = 0;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		cgpu->last_share_pool = pool->pool_no;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->last_share_time = cgpu->last_share_pool_time;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				applog(LOG_NOTICE, "Accepted %s %s %d pool %d",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				       hashshow, cgpu->api->name, cgpu->device_id, work->pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		/* Detect if a pool that has been temporarily disabled for
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (unlikely(pool->enabled == POOL_REJECTING)) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, "Rejecting pool %d now accepting shares, re-enabling!", pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->enabled = POOL_ENABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->rejected++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->seq_rejects++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				sprintf(where, "pool %d", work->pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		 * disable the pool because some pool error is likely to have
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->seq_rejects > 10 && !work->stale && opt_disable_pool && total_pools > 1) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->seq_rejects > utility * 3) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				       pool->pool_no, pool->seq_rejects);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool->enabled = POOL_REJECTING;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (pool == current_pool())
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool->seq_rejects = 0;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):/* Select any active pool in a rotating fashion when loadbalance is chosen */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static inline struct pool *select_pool(bool lagging)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool, *cp;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = cp;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = NULL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	while (!pool) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[rotating_pool];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if ((!pool->idle && pool->enabled == POOL_ENABLED) || pool == cp)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = NULL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	return pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	// Use a random work block pulled from a pool
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool = work->pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct cgminer_pool_stats *pool_stats = &(pool->cgminer_pool_stats);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	applog(LOG_DEBUG, "DBG: sending %s get RPC call: %s", pool->rpc_url, rpc_req);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	url = pool->rpc_url;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* A single failure response here might be reported as a dead pool and
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		val = json_rpc_call(curl, url, pool->rpc_userpass, rpc_req,
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			    false, false, &work->rolltime, pool, false);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	work->pool = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->getwork_requested++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer): * this pool. */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void recruit_curl(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	list_add(&ce->node, &pool->curlring);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->curls++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	applog(LOG_DEBUG, "Recruited curl %d for pool %d", pool->curls, pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static struct curl_ent *pop_curl_entry(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_lock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (!pool->curls)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		recruit_curl(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	else if (list_empty(&pool->curlring)) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if ((pool->submit_fail || opt_delaynet) && pool->curls > 4)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pthread_cond_wait(&pool->cr_cond, &pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			recruit_curl(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	ce = list_entry(pool->curlring.next, struct curl_ent, node);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_unlock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void push_curl_entry(struct curl_ent *ce, struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_lock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	list_add_tail(&ce->node, &pool->curlring);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pthread_cond_signal(&pool->cr_cond);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_unlock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):/* ce and pool may appear uninitialised at push_curl_entry, but they're always
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool * uninitialised_var(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = ret_work->pool = select_pool(wc->lagging);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		ce = pop_curl_entry(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		push_curl_entry(ce, pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = work->pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Factor in the average getwork delay of this pool, rounding it up to
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	getwork_delay = pool->cgminer_pool_stats.getwork_wait_rolling * 5 + 1;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (opt_fail_only && !share && pool != current_pool() && pool->enabled != POOL_REJECTING)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		work->pool->solved++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_NOTICE, "Found block for pool %d!", work->pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool = work->pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		else if (pool->submit_old)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_NOTICE, "Stale share detected, submitting as pool requested");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->stale_shares++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	ce = pop_curl_entry(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->stale_shares++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	push_curl_entry(ce, pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):/* Find the pool that currently has the highest priority */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static struct pool *priority_pool(int choice)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *ret = NULL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->prio == choice) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			ret = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_ERR, "WTF No pool %d found!", choice);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):void switch_pools(struct pool *selected)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool, *last_pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Switch selected to pool number 0 and move the rest down */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (pool->prio < selected->prio)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):					pool->prio++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		/* Both of these set to the master pool */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool = priority_pool(i);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (!pool->idle && pool->enabled == POOL_ENABLED) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):					pool_no = pool->pool_no;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			/* Select the next alive pool */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool = pools[next_pool];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (!pool->idle && pool->enabled == POOL_ENABLED) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = currentpool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool != last_pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "Switching to %s", pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Reset the queued amount to allow more to be queued for the new pool */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (work->pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			work->pool->discarded_work++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_NOTICE, "LONGPOLL from pool %d detected new block",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			       work->pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (work->pool == current_pool()) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_NOTICE, "LONGPOLL from pool %d requested work restart",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				work->pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void display_pool_summary(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog("Pool: %s\n", pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->solved)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			wlog("SOLVED %d BLOCK%s!\n", pool->solved, pool->solved > 1 ? "S" : "");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog("%s own long-poll support\n", pool->hdr_path ? "Has" : "Does not have");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Queued work requests: %d\n", pool->getwork_requested);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Share submissions: %d\n", pool->accepted + pool->rejected);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Accepted shares: %d\n", pool->accepted);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Rejected shares: %d\n", pool->rejected);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->accepted || pool->rejected)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			wlog(" Reject ratio: %.1f%%\n", (double)(pool->rejected * 100) / (double)(pool->accepted + pool->rejected));
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		efficiency = pool->getwork_requested ? pool->accepted * 100.0 / pool->getwork_requested : 0.0;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Discarded work due to new blocks: %d\n", pool->discarded_work);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Stale submissions discarded due to new blocks: %d\n", pool->stale_shares);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Unable to get work from server occasions: %d\n", pool->getfail_occasions);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlog(" Submitting work remotely delay occasions: %d\n\n", pool->remotefail_occasions);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):/* We can't remove the memory used for this struct pool because there may
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):void remove_pool(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *other;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (other->prio > pool->prio)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->pool_no < last_pool) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		/* Swap the last pool for this one */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		(pools[last_pool])->pool_no = pool->pool_no;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pools[pool->pool_no] = pools[last_pool];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->pool_no = total_pools;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->removed = true;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Write pool values */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool == current_pool())
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->enabled != POOL_ENABLED)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		wlogprint("%d: ", pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		switch (pool->enabled) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->idle? "Dead" : "Alive",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->prio,
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->rpc_url, pool->rpc_user);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	wlogprint("\nCurrent pool management strategy: %s\n",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	wlogprint("[A]dd pool [R]emove pool [D]isable pool [E]nable pool\n");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	wlogprint("[C]hange management strategy [S]witch pool [I]nformation\n");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			wlogprint("Cannot remove last pool");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		selected = curses_int("Select pool number");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[selected];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool == current_pool())
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool == current_pool()) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			wlogprint("Unable to remove pool due to activity\n");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->enabled = POOL_DISABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		remove_pool(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		selected = curses_int("Select pool number");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[selected];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->enabled = POOL_ENABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		switch_pools(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			wlogprint("Cannot disable last pool");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		selected = curses_int("Select pool number");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[selected];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->enabled = POOL_DISABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool == current_pool())
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		selected = curses_int("Select pool number");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[selected];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->enabled = POOL_ENABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->prio < current_pool()->prio)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			switch_pools(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		selected = curses_int("Select pool number");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = pools[selected];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		display_pool_summary(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static bool pool_active(struct pool *pool, bool pinging)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	applog(LOG_INFO, "Testing pool %s", pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	val = json_rpc_call(curl, pool->rpc_url, pool->rpc_userpass, rpc_req,
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			true, false, &rolltime, pool, false);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_DEBUG, "Successfully retrieved and deciphered work from pool %u %s",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			       pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			work->pool = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_DEBUG, "Pushing pooltest work to base pool");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->getwork_requested++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			gettimeofday(&pool->tv_idle, NULL);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_DEBUG, "Successfully retrieved but FAILED to decipher work from pool %u %s",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			       pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->lp_url)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->hdr_path) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			hdr_path = pool->hdr_path;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool->lp_url = hdr_path;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (pool->rpc_url[strlen(pool->rpc_url) - 1] != '/')
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool->lp_url = malloc(strlen(pool->rpc_url) + strlen(copy_start) + 2);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (!pool->lp_url) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				sprintf(pool->lp_url, "%s%s%s", pool->rpc_url, need_slash ? "/" : "", copy_start);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->lp_url = NULL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (!pool->lp_started) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->lp_started = true;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (unlikely(pthread_create(&pool->longpoll_thread, NULL, longpoll_thread, (void *)pool)))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				quit(1, "Failed to create pool longpoll thread");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_DEBUG, "FAILED to retrieve work from pool %u %s",
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		       pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, "Pool %u slow/down or URL or credentials invalid", pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void pool_died(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (!pool_tset(pool, &pool->idle)) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "Pool %d %s not responding!", pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		gettimeofday(&pool->tv_idle, NULL);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void pool_resus(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	applog(LOG_WARNING, "Pool %d %s alive", pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->prio < cp_prio() && pool_strategy == POOL_FAILOVER)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	 * system lagging and allow work to be gathered from another pool if
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (work->pool == current_pool() || pool_strategy == POOL_LOADBALANCE)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	return (work->pool && work->rolltime && !work->clone &&
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = current_pool();
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (!pool->lagging && requested && !newreq && !requests_staged() && requests_queued() >= mining_threads) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		 * get_work are waiting on work and only consider the pool
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (stalled && !pool_tset(pool, &pool->lagging)) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, "Pool %d not providing work fast enough", pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->getfail_occasions++;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool_died(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = work_heap->pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool_tclear(pool, &pool->lagging);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool_tclear(pool, &pool->idle))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool_resus(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (api->free_work && likely(work->pool))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool_stats = &(work->pool->cgminer_stats);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void convert_to_work(json_t *val, int rolltime, struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	work->pool = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->enabled == POOL_REJECTING)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	 * the longpoll work from a pool that has been rejecting shares as a
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	 * way to detect when the pool has recovered.
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool != current_pool() && opt_fail_only && pool->enabled != POOL_REJECTING) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):/* If we want longpoll, enable it for the chosen default pool, or, if
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer): * the pool does not support longpoll, find the first one that does
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static struct pool *select_longpoll_pool(struct pool *cp)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool->hdr_path)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			return pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):/* This will make the longpoll thread wait till it's the current pool, or it
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void wait_lpcurrent(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (pool->enabled == POOL_REJECTING || pool_strategy == POOL_LOADBALANCE)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	while (pool != current_pool() && pool_strategy != POOL_LOADBALANCE) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *cp = (struct pool *)userdata;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* This *pool is the source of the actual longpoll, not the pool we've
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool = NULL;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = select_longpoll_pool(cp);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (!pool) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "No suitable long-poll found for pool %s", cp->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		while (!pool) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool = select_longpoll_pool(cp);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Any longpoll from any pool is enough for this to be true */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (cp == pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "Long-polling activated for %s", pool->lp_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "Long-polling activated for pool %s via %s", cp->rpc_url, pool->lp_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		val = json_rpc_call(curl, pool->lp_url, pool->rpc_userpass, rpc_req,
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				    false, true, &rolltime, pool, false);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool->submit_old = json_is_true(soval);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool->submit_old = false;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			convert_to_work(val, rolltime, pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):					       "longpoll failed for %s, retrying every 30s", pool->lp_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):					"longpoll failed for %s, ending thread", pool->lp_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (pool != cp) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool = select_longpoll_pool(cp);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (unlikely(!pool))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (unlikely(pool->removed))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):static void reap_curl(struct pool *pool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_lock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	list_for_each_entry_safe(ent, iter, &pool->curlring, node) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_DEBUG, "Reaped curl %d from pool %d", pool->curls, pool->pool_no);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->curls--;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	mutex_unlock(&pool->pool_lock);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			struct pool *pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				reap_curl(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->enabled == POOL_DISABLED)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			/* Test pool is idle once every minute */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->idle && now.tv_sec - pool->tv_idle.tv_sec > 60) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				gettimeofday(&pool->tv_idle, NULL);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (pool_active(pool, true) && pool_tclear(pool, &pool->idle))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):					pool_resus(pool);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			struct pool *pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, "Pool: %s", pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->solved)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				applog(LOG_WARNING, "SOLVED %d BLOCK%s!", pool->solved, pool->solved > 1 ? "S" : "");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Queued work requests: %d", pool->getwork_requested);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Share submissions: %d", pool->accepted + pool->rejected);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Accepted shares: %d", pool->accepted);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Rejected shares: %d", pool->rejected);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->accepted || pool->rejected)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				applog(LOG_WARNING, " Reject ratio: %.1f%%", (double)(pool->rejected * 100) / (double)(pool->accepted + pool->rejected));
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			efficiency = pool->getwork_requested ? pool->accepted * 100.0 / pool->getwork_requested : 0.0;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Discarded work due to new blocks: %d", pool->discarded_work);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Stale submissions discarded due to new blocks: %d", pool->stale_shares);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Unable to get work from server occasions: %d", pool->getfail_occasions);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			applog(LOG_WARNING, " Submitting work remotely delay occasions: %d\n", pool->remotefail_occasions);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool = add_pool();
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->rpc_url = url;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->rpc_user = user;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->rpc_pass = pass;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->rpc_userpass = malloc(strlen(pool->rpc_user) + strlen(pool->rpc_pass) + 2);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (!pool->rpc_userpass)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	sprintf(pool->rpc_userpass, "%s:%s", pool->rpc_user, pool->rpc_pass);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Test the pool is not idle if we're live running, otherwise
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	pool->enabled = POOL_ENABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	if (live && !pool_active(pool, false))
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->idle = true;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool = calloc(sizeof(struct pool), 1);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->pool_no = 0;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pools[total_pools++] = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pthread_mutex_init(&pool->pool_lock, NULL);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->rpc_url = malloc(255);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		strcpy(pool->rpc_url, "Benchmark");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->rpc_user = pool->rpc_url;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->rpc_pass = pool->rpc_url;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->enabled = POOL_ENABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->idle = false;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		applog(LOG_WARNING, "Need to specify at least one pool server.");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->cgminer_stats.getwork_wait_min.tv_sec = MIN_SEC_UNSET;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->cgminer_pool_stats.getwork_wait_min.tv_sec = MIN_SEC_UNSET;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):        applog(LOG_ERR,"[Nimo]pool->rpc_userpass",devices_enabled);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		if (!pool->rpc_userpass) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (!pool->rpc_user || !pool->rpc_pass)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				quit(1, "No login credentials supplied for pool %u %s", i, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->rpc_userpass = malloc(strlen(pool->rpc_user) + strlen(pool->rpc_pass) + 2);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (!pool->rpc_userpass)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			sprintf(pool->rpc_userpass, "%s:%s", pool->rpc_user, pool->rpc_pass);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->rpc_user = malloc(strlen(pool->rpc_userpass) + 1);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (!pool->rpc_user)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			strcpy(pool->rpc_user, pool->rpc_userpass);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->rpc_user = strtok(pool->rpc_user, ":");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (!pool->rpc_user)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	/* Set the currentpool to pool 0 */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		struct pool *pool  = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->enabled = POOL_ENABLED;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->idle = true;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):	applog(LOG_NOTICE, "Probing for an alive pool");
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):		/* Look for at least one active pool before starting */
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			struct pool *pool  = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool_active(pool, false)) {
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):					currentpool = pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				applog(LOG_INFO, "Pool %d %s active", pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				if (pool == currentpool)
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				applog(LOG_WARNING, "Unable to get work from pool %d %s", pool->pool_no, pool->rpc_url);
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				struct pool *pool;
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				pool = pools[i];
+Cgminer.c (e:\jobs\code\cgminer2.4.4\cgminer):				       i, pool->rpc_url, pool->rpc_user, pool->rpc_pass);
+Driver-cpu.c (e:\jobs\code\cgminer2.4.4\cgminer):	// Use a random work block pulled from a pool
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):		      struct pool *pool, bool share)
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):		probing = !pool->probed;
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):		pool->probed = true;
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):			if (pool->hdr_path != NULL)
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):				free(pool->hdr_path);
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->hdr_path = hi.lp_path;
+Util.c (e:\jobs\code\cgminer2.4.4\cgminer):			pool->hdr_path = NULL;
