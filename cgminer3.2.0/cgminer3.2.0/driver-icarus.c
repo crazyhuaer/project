@@ -771,6 +771,8 @@ static bool icarus_detect_one(struct libusb_device *dev, struct usb_find_devices
 		if (err != LIBUSB_SUCCESS || amount != sizeof(ob_bin))
 			continue;
 
+        applog(LOG_ERR,"[Nimo][icarus_detect_one]ob_bin=%s",ob_bin);
+		
 		memset(nonce_bin, 0, sizeof(nonce_bin));
 		ret = icarus_get_nonce(icarus, nonce_bin, &tv_start, &tv_finish, NULL, 100);
 		if (ret != ICA_NONCE_OK)
@@ -903,6 +905,9 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 	usb_buffer_clear(icarus);
 
 	err = usb_write(icarus, (char *)ob_bin, sizeof(ob_bin), &amount, C_SENDWORK);
+
+	applog(LOG_ERR,"[Nimo][icarus_scanhash]usb write ob_bin=%s",ob_bin);
+
 	if (err < 0 || amount != sizeof(ob_bin)) {
 		applog(LOG_ERR, "%s%i: Comms error (werr=%d amt=%d)",
 				icarus->drv->name, icarus->device_id, err, amount);
@@ -921,11 +926,17 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 	/* Icarus will return 4 bytes (ICARUS_READ_SIZE) nonces or nothing */
 	memset(nonce_bin, 0, sizeof(nonce_bin));
 	ret = icarus_get_nonce(icarus, nonce_bin, &tv_start, &tv_finish, thr, info->read_time);
+	
 	if (ret == ICA_NONCE_ERROR)
 		return 0;
 
 	work->blk.nonce = 0xffffffff;
 
+	
+    applog(LOG_ERR,"[Nimo][icarus_scanhash]icarus_get_nonce nonce_bin=%s,
+		            mean icarus fpga return the code is %s",nonce_bin,nonce_bin);
+
+	
 	// aborted before becoming idle, get new work
 	if (ret == ICA_NONCE_TIMEOUT || ret == ICA_NONCE_RESTART) {
 		timersub(&tv_finish, &tv_start, &elapsed);
@@ -953,6 +964,9 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 	memcpy((char *)&nonce, nonce_bin, sizeof(nonce_bin));
 	nonce = htobe32(nonce);
 	curr_hw_errors = icarus->hw_errors;
+
+    applog(LOG_ERR,"[Nimo][icarus_scanhash]submit_nonce nonce=%s",nonce);
+	
 	submit_nonce(thr, work, nonce);
 	was_hw_error = (curr_hw_errors > icarus->hw_errors);
 

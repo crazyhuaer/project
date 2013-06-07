@@ -1357,6 +1357,8 @@ static void load_default_config(void)
 		free(cnfbuf);
 		cnfbuf = NULL;
 	}
+
+	applog(LOG_ERR,"[Nimo]cnfbuf(config_file_path)=%s",cnfbuf);
 }
 
 extern const char *opt_argv0;
@@ -4418,6 +4420,7 @@ void default_save_file(char *filename)
 	strcpy(filename, "");
 #endif
 	strcat(filename, def_conf);
+
 }
 
 #ifdef HAVE_CURSES
@@ -7283,17 +7286,31 @@ int main(int argc, char *argv[])
 	int i, j;
 	char *s;
 
+    applog(LOG_ERR,"=========================");
+    applog(LOG_ERR,"Display some arguments.");
+    applog(LOG_ERR,"sizeof(int)=%d,sizeof(UT_hash_handle)=%d",\
+		            sizeof(int),sizeof(UT_hash_handle));
+	applog(LOG_ERR,"=========================");
+
 	/* This dangerous functions tramples random dynamically allocated
 	 * variables so do it before anything at all */
 	if (unlikely(curl_global_init(CURL_GLOBAL_ALL)))
 		quit(1, "Failed to curl_global_init");
 
+    // [Nimo]get the arguments and output.
 	initial_args = malloc(sizeof(char *) * (argc + 1));
-	for  (i = 0; i < argc; i++)
+	for  (i = 0; i < argc; i++){
 		initial_args[i] = strdup(argv[i]);
+		applog(LOG_ERR,"[Nimo]args[%d]=%s",i,argv[i]);
+	}
+
+	// [Nimo]close the initial_args array.
 	initial_args[argc] = NULL;
 
 #ifdef HAVE_LIBUSB
+
+    applog(LOG_ERR, "[Nimo]YES,I have libusb.HAVE_LIBUSB.");
+
 	int err = libusb_init(NULL);
 	if (err) {
 		fprintf(stderr, "libusb_init() failed err %d", err);
@@ -7301,11 +7318,15 @@ int main(int argc, char *argv[])
 		quit(1, "libusb_init() failed");
 	}
 #ifdef USE_USBUTILS
+
+    applog(LOG_ERR,"[Nimo]USE_USBUTILS");
+
 	mutex_init(&cgusb_lock);
 	mutex_init(&cgusbres_lock);
 #endif
 #endif
 
+    // Init the mutex rwlock and cglock 
 	mutex_init(&hash_lock);
 	mutex_init(&console_lock);
 	cglock_init(&control_lock);
@@ -7339,9 +7360,12 @@ int main(int argc, char *argv[])
 #ifndef WIN32
 	signal(SIGPIPE, SIG_IGN);
 #endif
+
 	opt_kernel_path = alloca(PATH_MAX);
 	strcpy(opt_kernel_path, CGMINER_PREFIX);
 	cgminer_path = alloca(PATH_MAX);
+	
+	// malloc a string size for s
 	s = strdup(argv[0]);
 	strcpy(cgminer_path, dirname(s));
 	free(s);
@@ -7362,6 +7386,9 @@ int main(int argc, char *argv[])
 	INIT_LIST_HEAD(&scan_devices);
 
 #ifdef HAVE_OPENCL
+
+    applog(LOG_ERR,"[Nimo]HAVE_OPENCL");
+
 	memset(gpus, 0, sizeof(gpus));
 	for (i = 0; i < MAX_GPUDEVICES; i++)
 		gpus[i].dynamic = true;
@@ -7380,6 +7407,9 @@ int main(int argc, char *argv[])
 	if (!config_loaded)
 		load_default_config();
 
+
+    applog(LOG_ERR,"[Nimo]opt_benchmark=%d",opt_benchmark);
+
 	if (opt_benchmark) {
 		struct pool *pool;
 
@@ -7394,6 +7424,9 @@ int main(int argc, char *argv[])
 	}
 
 #ifdef HAVE_CURSES
+
+    applog(LOG_ERR,"[Nimo]HAVE_CURSES");
+
 	if (opt_realquiet || opt_display_devs)
 		use_curses = false;
 
@@ -7438,6 +7471,7 @@ int main(int argc, char *argv[])
 	gwsched_thr_id = 0;
 
 #ifdef USE_USBUTILS
+    applog(LOG_ERR,"[Nimo]USE_USBUTILS,Enter usb_initialise()");
 	usb_initialise();
 
 	// before device detection
@@ -7459,26 +7493,41 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef USE_ICARUS
+
+    applog(LOG_ERR,"[Nimo]Enter USE_ICARUS");
+
 	if (!opt_scrypt)
 		icarus_drv.drv_detect();
 #endif
 
 #ifdef USE_BFLSC
+
+    applog(LOG_ERR,"[Nimo]Enter USE_BFLSC");
+
 	if (!opt_scrypt)
 		bflsc_drv.drv_detect();
 #endif
 
 #ifdef USE_BITFORCE
+
+    applog(LOG_ERR,"[Nimo]Enter USE_BITFORCE");
+
 	if (!opt_scrypt)
 		bitforce_drv.drv_detect();
 #endif
 
 #ifdef USE_MODMINER
+
+    applog(LOG_ERR,"[Nimo]Enter USE_MODMINER");
+
 	if (!opt_scrypt)
 		modminer_drv.drv_detect();
 #endif
 
 #ifdef USE_ZTEX
+
+    applog(LOG_ERR,"[Nimo]Enter USE_ZTEX");
+
 	if (!opt_scrypt)
 		ztex_drv.drv_detect();
 #endif
@@ -7486,6 +7535,9 @@ int main(int argc, char *argv[])
 	/* Detect avalon last since it will try to claim the device regardless
 	 * as detection is unreliable. */
 #ifdef USE_AVALON
+
+    applog(LOG_ERR,"[Nimo]Enter USE_AVALON");
+
 	if (!opt_scrypt)
 		avalon_drv.drv_detect();
 #endif
@@ -7571,6 +7623,9 @@ int main(int argc, char *argv[])
 	currentpool = pools[0];
 
 #ifdef HAVE_SYSLOG_H
+
+    applog(LOG_ERR,"[Nimo]Enter HAVE_SYSLOG_H");
+
 	if (use_syslog)
 		openlog(PACKAGE, LOG_PID, LOG_USER);
 #endif
