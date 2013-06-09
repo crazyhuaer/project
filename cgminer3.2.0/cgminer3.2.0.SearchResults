@@ -1,3 +1,142 @@
----- curl_global_init Matches (2 in 1 files) ----
-Cgminer.c (cgminer3.2.0):	if (unlikely(curl_global_init(CURL_GLOBAL_ALL)))
-Cgminer.c (cgminer3.2.0):		quit(1, "Failed to curl_global_init");
+---- cglock_init Matches (4 in 1 files) ----
+Cgminer.c (cgminer3.2.0):	cglock_init(&pool->data_lock);
+Cgminer.c (cgminer3.2.0):	cglock_init(&pool->gbt_lock);
+Cgminer.c (cgminer3.2.0):	cglock_init(&control_lock);
+Cgminer.c (cgminer3.2.0):	cglock_init(&ch_lock);
+---- PATH_MAX Matches (8 in 4 files) ----
+Api.c (cgminer3.2.0):	char filename[PATH_MAX];
+Cgminer.c (cgminer3.2.0):	cnfbuf = malloc(PATH_MAX);
+Cgminer.c (cgminer3.2.0):		char *str, filename[PATH_MAX], prompt[PATH_MAX + 50];
+Cgminer.c (cgminer3.2.0):	opt_kernel_path = alloca(PATH_MAX);
+Cgminer.c (cgminer3.2.0):	cgminer_path = alloca(PATH_MAX);
+Fpgautils.c (cgminer3.2.0):	char fullpath[PATH_MAX];
+Ocl.c (cgminer3.2.0):	char *fullpath = alloca(PATH_MAX);
+---- UT_hash_handle Matches (3 in 1 files) ----
+Cgminer.c (cgminer3.2.0):	UT_hash_handle hh;
+Cgminer.c (cgminer3.2.0):	UT_hash_handle hh;
+Cgminer.c (cgminer3.2.0):	UT_hash_handle hh;
+---- listing known devices Matches (1 in 1 files) ----
+Usbutils.c (cgminer3.2.0):			append(&buf, " - listing known devices", &off, &len);
+---- usb_all Matches (4 in 2 files) ----
+Cgminer.c (cgminer3.2.0):	usb_all(0);
+Usbutils.c (cgminer3.2.0):void usb_all(int level)
+Usbutils.c (cgminer3.2.0):			quit(1, "USB failed to malloc buf in usb_all");
+Usbutils.c (cgminer3.2.0):			usb_all(opt_usbdump);
+---- struct work Matches (0 in 0 files) ----
+---- currentpool Matches (10 in 1 files) ----
+Cgminer.c (cgminer3.2.0):static struct pool *currentpool = NULL;
+Cgminer.c (cgminer3.2.0):	pool = currentpool;
+Cgminer.c (cgminer3.2.0):	last_pool = currentpool;
+Cgminer.c (cgminer3.2.0):	pool_no = currentpool->pool_no;
+Cgminer.c (cgminer3.2.0):	currentpool = pools[pool_no];
+Cgminer.c (cgminer3.2.0):	pool = currentpool;
+Cgminer.c (cgminer3.2.0):	prio = currentpool->prio;
+Cgminer.c (cgminer3.2.0):			currentpool = pool;
+Cgminer.c (cgminer3.2.0):	/* Set the currentpool to pool 0 */
+Cgminer.c (cgminer3.2.0):	currentpool = pools[0];
+---- new_blocks Matches (7 in 3 files) ----
+Api.c (cgminer3.2.0):	root = api_add_uint(root, "Network Blocks", &(new_blocks), true);
+Cgminer.c (cgminer3.2.0):unsigned int new_blocks;
+Cgminer.c (cgminer3.2.0):		total_staged(), total_stale, new_blocks,
+Cgminer.c (cgminer3.2.0):		s->block_no = new_blocks++;
+Cgminer.c (cgminer3.2.0):		if (unlikely(new_blocks == 1))
+Cgminer.c (cgminer3.2.0):	applog(LOG_WARNING, "New blocks detected on network: %d\n", new_blocks);
+Miner.h (cgminer3.2.0):extern unsigned int new_blocks;
+---- new_blocks = Matches (1 in 1 files) ----
+Cgminer.c (cgminer3.2.0):		if (unlikely(new_blocks == 1))
+---- Probing for an alive pool Matches (1 in 1 files) ----
+Cgminer.c (cgminer3.2.0):	applog(LOG_NOTICE, "Probing for an alive pool");
+---- etwork diff set to Matches (0 in 0 files) ----
+---- network diff set to Matches (0 in 0 files) ----
+---- Long-polling activated for Matches (2 in 1 files) ----
+Cgminer.c (cgminer3.2.0):			applog(LOG_WARNING, "Long-polling activated for %s", lp_url);
+Cgminer.c (cgminer3.2.0):			applog(LOG_WARNING, "Long-polling activated for %s via %s", cp->rpc_url, lp_url);
+---- Accepted Matches (62 in 3 files) ----
+Api.c (cgminer3.2.0):		root = api_add_int(root, "Accepted", &(cgpu->accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_diff(root, "Difficulty Accepted", &(cgpu->diff_accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_int(root, "Accepted", &(cgpu->accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_diff(root, "Difficulty Accepted", &(cgpu->diff_accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_int(root, "Accepted", &(cgpu->accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_diff(root, "Difficulty Accepted", &(cgpu->diff_accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_int(root, "Accepted", &(pool->accepted), false);
+Api.c (cgminer3.2.0):		root = api_add_diff(root, "Difficulty Accepted", &(pool->diff_accepted), false);
+Api.c (cgminer3.2.0):	root = api_add_int(root, "Accepted", &(total_accepted), true);
+Api.c (cgminer3.2.0):	root = api_add_diff(root, "Difficulty Accepted", &(total_diff_accepted), true);
+Api.c (cgminer3.2.0):			applog(LOG_DEBUG, "API: connection from %s - %s", connectaddr, addrok ? "Accepted" : "Ignored");
+Cgminer.c (cgminer3.2.0):				applog(LOG_NOTICE, "Accepted %s %s %d pool %d %s%s",
+Cgminer.c (cgminer3.2.0):				applog(LOG_NOTICE, "Accepted %s %s %d %s%s",
+Cgminer.c (cgminer3.2.0):		wlog(" Accepted shares: %d\n", pool->accepted);
+Cgminer.c (cgminer3.2.0):		wlog(" Accepted difficulty shares: %1.f\n", pool->diff_accepted);
+Cgminer.c (cgminer3.2.0):			applog(LOG_NOTICE, "Accepted untracked stratum share from pool %d", pool->pool_no);
+Cgminer.c (cgminer3.2.0):	applog(LOG_WARNING, "Accepted shares: %d", total_accepted);
+Cgminer.c (cgminer3.2.0):	applog(LOG_WARNING, "Accepted difficulty shares: %1.f", total_diff_accepted);
+Cgminer.c (cgminer3.2.0):			applog(LOG_WARNING, " Accepted shares: %d", pool->accepted);
+Cgminer.c (cgminer3.2.0):			applog(LOG_WARNING, " Accepted difficulty shares: %1.f", pool->diff_accepted);
+Miner.php (cgminer3.2.0): 'SUMMARY' => array('Elapsed', 'MHS av', 'Found Blocks=Blks', 'Accepted', 'Rejected=Rej', 'Utility'),
+Miner.php (cgminer3.2.0):			'DEVS.MHS av=MHS av', 'DEVS.Accepted=Accept', 'DEVS.Rejected=Rej',
+Miner.php (cgminer3.2.0): 'POOL' => array('POOL', 'Status', 'Accepted', 'Rejected=Rej', 'Last Share Time'));
+Miner.php (cgminer3.2.0): 'SUMMARY' => array('MHS av', 'Found Blocks', 'Accepted', 'Rejected', 'Utility'),
+Miner.php (cgminer3.2.0): 'DEVS+NOTIFY' => array('DEVS.MHS av', 'DEVS.Accepted', 'DEVS.Rejected', 'DEVS.Utility'),
+Miner.php (cgminer3.2.0): 'POOL' => array('Accepted', 'Rejected'));
+Miner.php (cgminer3.2.0):			'Accepted', 'Rejected=Rej', 'Utility',
+Miner.php (cgminer3.2.0): 'SUMMARY' => array('MHS av', 'Found Blocks', 'Accepted',
+Miner.php (cgminer3.2.0): 'SUMMARY' => array('Elapsed', 'MHS av', 'Found Blocks=Blks', 'Accepted', 'Rejected=Rej',
+Miner.php (cgminer3.2.0): 'POOL+STATS' => array('STATS.ID=ID', 'POOL.URL=URL', 'POOL.Difficulty Accepted=Diff Acc',
+Miner.php (cgminer3.2.0): 'SUMMARY' => array('MHS av', 'Found Blocks', 'Accepted',
+Miner.php (cgminer3.2.0): 'POOL+STATS' => array('POOL.Difficulty Accepted', 'POOL.Difficulty Rejected',
+Miner.php (cgminer3.2.0):	'calc' => array('POOL.Difficulty Accepted' => 'sum', 'POOL.Difficulty Rejected' => 'sum',
+Miner.php (cgminer3.2.0):			if (isset($alldata['Difficulty Accepted'])
+Miner.php (cgminer3.2.0):			&&  isset($alldata['Accepted'])
+Miner.php (cgminer3.2.0):			&&  ($alldata['Difficulty Accepted'] > 0)
+Miner.php (cgminer3.2.0):			&&  ($alldata['Accepted'] > 0))
+Miner.php (cgminer3.2.0):				$da = $alldata['Difficulty Accepted'];
+Miner.php (cgminer3.2.0):				$a = $alldata['Accepted'];
+Miner.php (cgminer3.2.0):			if (isset($alldata['Difficulty Accepted'])
+Miner.php (cgminer3.2.0):			&&  isset($alldata['Accepted'])
+Miner.php (cgminer3.2.0):			&&  ($alldata['Difficulty Accepted'] > 0)
+Miner.php (cgminer3.2.0):			&&  ($alldata['Accepted'] > 0))
+Miner.php (cgminer3.2.0):				$da = $alldata['Difficulty Accepted'];
+Miner.php (cgminer3.2.0):				$a = $alldata['Accepted'];
+Miner.php (cgminer3.2.0):	case 'GPU.Accepted':
+Miner.php (cgminer3.2.0):	case 'PGA.Accepted':
+Miner.php (cgminer3.2.0):	case 'DEVS.Accepted':
+Miner.php (cgminer3.2.0):	case 'SUMMARY.Accepted':
+Miner.php (cgminer3.2.0):	case 'POOL.Accepted':
+Miner.php (cgminer3.2.0):	case 'total.Accepted':
+Miner.php (cgminer3.2.0):	case 'SUMMARY.Difficulty Accepted':
+Miner.php (cgminer3.2.0):	case 'GPU.Difficulty Accepted':
+Miner.php (cgminer3.2.0):	case 'PGA.Difficulty Accepted':
+Miner.php (cgminer3.2.0):	case 'DEVS.Difficulty Accepted':
+Miner.php (cgminer3.2.0):	case 'POOL.Difficulty Accepted':
+Miner.php (cgminer3.2.0):	case 'total.Difficulty Accepted':
+Miner.php (cgminer3.2.0): 'devs' => array('MHS av' => 1, 'MHS 5s' => 1, 'Accepted' => 1, 'Rejected' => 1,
+Miner.php (cgminer3.2.0):			'Diff1 Shares' => 1, 'Diff1 Work' => 1, 'Difficulty Accepted' => 1,
+Miner.php (cgminer3.2.0): 'pools' => array('Getworks' => 1, 'Accepted' => 1, 'Rejected' => 1, 'Discarded' => 1,
+Miner.php (cgminer3.2.0):			'Diff1 Shares' => 1, 'Diff1 Work' => 1, 'Difficulty Accepted' => 1,
+Miner.php (cgminer3.2.0): $sum = array('MHS av', 'Getworks', 'Found Blocks', 'Accepted', 'Rejected', 'Discarded', 'Stale', 'Utility', 'Local Work', 'Total MH', 'Work Utility', 'Diff1 Shares', 'Diff1 Work', 'Difficulty Accepted', 'Difficulty Rejected', 'Difficulty Stale');
+---- usb_write Matches (25 in 6 files) ----
+Driver-avalon.c (cgminer3.2.0):	err = usb_write(avalon, buf, len, &amount, ep);
+Driver-avalon.c (cgminer3.2.0):	applog(LOG_DEBUG, "%s%i: usb_write got err %d", avalon->drv->name,
+Driver-avalon.c (cgminer3.2.0):		applog(LOG_WARNING, "usb_write error on avalon_write");
+Driver-avalon.c (cgminer3.2.0):		applog(LOG_WARNING, "usb_write length mismatch on avalon_write");
+Driver-bflsc.c (cgminer3.2.0):		return usb_write(bflsc, buf, buflen, amount, cmd);
+Driver-bflsc.c (cgminer3.2.0):	return usb_write(bflsc, (char *)&data, len, amount, cmd);
+Driver-bitforce.c (cgminer3.2.0):	if ((err = usb_write(bitforce, BITFORCE_IDENTIFY, BITFORCE_IDENTIFY_LEN, &amount, C_REQUESTIDENTIFY)) < 0 || amount != BITFORCE_IDENTIFY_LEN) {
+Driver-bitforce.c (cgminer3.2.0):	if ((err = usb_write(bitforce, BITFORCE_FLASH, BITFORCE_FLASH_LEN, &amount, C_REQUESTFLASH)) < 0 || amount != BITFORCE_FLASH_LEN) {
+Driver-bitforce.c (cgminer3.2.0):	if ((err = usb_write(bitforce, BITFORCE_TEMPERATURE, BITFORCE_TEMPERATURE_LEN, &amount, C_REQUESTTEMPERATURE)) < 0 || amount != BITFORCE_TEMPERATURE_LEN) {
+Driver-bitforce.c (cgminer3.2.0):	if ((err = usb_write(bitforce, cmd, len, &amount, C_REQUESTSENDWORK)) < 0 || amount != len) {
+Driver-bitforce.c (cgminer3.2.0):	if ((err = usb_write(bitforce, (char *)ob, len, &amount, C_SENDWORK)) < 0 || amount != len) {
+Driver-bitforce.c (cgminer3.2.0):		usb_write(bitforce, BITFORCE_WORKSTATUS, BITFORCE_WORKSTATUS_LEN, &amount, C_REQUESTWORKSTATUS);
+Driver-icarus.c (cgminer3.2.0):		err = usb_write(icarus, (char *)ob_bin, sizeof(ob_bin), &amount, C_SENDTESTWORK);
+Driver-icarus.c (cgminer3.2.0):	err = usb_write(icarus, (char *)ob_bin, sizeof(ob_bin), &amount, C_SENDWORK);
+Driver-modminer.c (cgminer3.2.0):	err = usb_write(modminer, (char *)NOOP, sizeof(NOOP)-1, &amount, C_PING);
+Driver-modminer.c (cgminer3.2.0):	if ((err = usb_write(modminer, MODMINER_GET_VERSION, 1, &amount, C_REQUESTVERSION)) < 0 || amount != 1) {
+Driver-modminer.c (cgminer3.2.0):	if ((err = usb_write(modminer, MODMINER_FPGA_COUNT, 1, &amount, C_REQUESTFPGACOUNT) < 0 || amount != 1)) {
+Driver-modminer.c (cgminer3.2.0):	if ((err = usb_write(modminer, buf, 6, &amount, C_STARTPROGRAM)) < 0 || amount != 6) {
+Driver-modminer.c (cgminer3.2.0):		while ((err = usb_write(modminer, ptr, remaining, &amount, C_PROGRAM)) < 0 || amount != (int)remaining) {
+Driver-modminer.c (cgminer3.2.0):	if ((err = usb_write(modminer, (char *)cmd, 6, &amount, C_SETCLOCK)) < 0 || amount != 6) {
+Driver-modminer.c (cgminer3.2.0):	if ((err = usb_write(modminer, (char *)cmd, 2, &amount, C_REQUESTUSERCODE)) < 0 || amount != 2) {
+Driver-modminer.c (cgminer3.2.0):	if ((err = usb_write(modminer, cmd, 46, &amount, C_SENDWORK)) < 0 || amount != 46) {
+Driver-modminer.c (cgminer3.2.0):	if (usb_write(modminer, (char *)cmd, 2, &amount, C_REQUESTTEMPERATURE) == 0 && amount == 2 &&
+Driver-modminer.c (cgminer3.2.0):		if ((err = usb_write(modminer, cmd, 2, &amount, C_REQUESTWORKSTATUS)) < 0 || amount != 2) {
+Usbutils.h (cgminer3.2.0):#define usb_write(cgpu, buf, bufsiz, wrote, cmd) \
