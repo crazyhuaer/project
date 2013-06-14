@@ -415,7 +415,11 @@ json_t *json_rpc_call(CURL *curl, const char *url,
 		applog(LOG_DEBUG, "Empty data received in json_rpc_call.");
 		goto err_out;
 	}
-
+	
+==============================================
+	applog(LOG_ERR,"[Nimo]upload_data.buf=%s,all_data.buf=%s",upload_data.buf,all_data.buf);
+==============================================
+	
 	pool->cgminer_pool_stats.times_sent++;
 	if (curl_easy_getinfo(curl, CURLINFO_SIZE_UPLOAD, &byte_count) == CURLE_OK)
 		pool->cgminer_pool_stats.bytes_sent += byte_count;

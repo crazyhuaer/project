@@ -1823,6 +1823,11 @@ static bool work_decode(struct pool *pool, struct work *work, json_t *val)
 		goto out;
 	}
 
+==============================================
+    applog(LOG_ERR,"[Nimo][pool_active/work_decode]pool->has_gbt=%d,
+                    if pool->has_gbt=0,then into getwork_decode,else into gbt_decode",pool->has_gbt);
+==============================================	
+
 	if (pool->has_gbt) {
 		if (unlikely(!gbt_decode(pool, res_val)))
 			goto out;
@@ -3635,9 +3640,13 @@ static bool test_work_current(struct work *work)
 
 	if (work->mandatory)
 		return ret;
-
+    
 	/* Hack to work around dud work sneaking into test */
+
+    applog(LOG_ERR,"[Nimo]main[stage_thread]test_work_current work->data=%s",work->data);
+	
 	hexstr = bin2hex(work->data + 8, 18);
+	applog(LOG_ERR,"[Nimo]main[stage_thread]test_work_current work->data=%s,hexstr=%s",work->data,hexstr);
 	if (!strncmp(hexstr, "000000000000000000000000000000000000", 36))
 		goto out_free;
 
@@ -5202,6 +5211,11 @@ retry_stratum:
 
 	/* Probe for GBT support on first pass */
 	if (!pool->probed && !opt_fix_protocol) {
+		
+==============================================
+		applog(LOG_ERR,"[Nimo]GBT support first pass.!")
+==============================================	
+
 		applog(LOG_DEBUG, "Probing for GBT support");
 		val = json_rpc_call(curl, pool->rpc_url, pool->rpc_userpass,
 				    gbt_req, true, false, &rolltime, pool, false);
@@ -5221,6 +5235,10 @@ retry_stratum:
 
 				if (json_is_string(arrval)) {
 					const char *mutable = json_string_value(arrval);
+
+==============================================
+                    applog(LOG_ERR,"[Nimo]mutables:%d:mutable=%s",i,mutable);
+==============================================
 
 					if (!strncasecmp(mutable, "coinbase/append", 15))
 						append = true;
@@ -5248,6 +5266,11 @@ retry_stratum:
 	}
 
 	cgtime(&tv_getwork);
+
+==============================================
+		applog(LOG_ERR,"[Nimo]GBT support second pass.!")
+==============================================	
+	
 	val = json_rpc_call(curl, pool->rpc_url, pool->rpc_userpass,
 			    pool->rpc_req, true, false, &rolltime, pool, false);
 	cgtime(&tv_getwork_reply);
@@ -7404,11 +7427,14 @@ int main(int argc, char *argv[])
 	if (argc != 1)
 		quit(1, "Unexpected extra commandline arguments");
 
+    
+    applog(LOG_ERR,"[Nimo]config_loaded=%d,if config_loaded equal 0 then read the default config,
+		            else continue...",config_loaded);
+
 	if (!config_loaded)
 		load_default_config();
 
-
-    applog(LOG_ERR,"[Nimo]opt_benchmark=%d",opt_benchmark);
+    applog(LOG_ERR,"[Nimo]opt_benchmark=%d,if opt_benchmark equal 1 then add_pool()",opt_benchmark);
 
 	if (opt_benchmark) {
 		struct pool *pool;
@@ -7435,6 +7461,9 @@ int main(int argc, char *argv[])
 #endif
 
 	applog(LOG_WARNING, "Started %s", packagename);
+
+    applog(LOG_ERR,"[Nimo]cnfbuf=%s,if cnfbuf is not null,then switch fileconf_load=%d",cnfbuf,fileconf_load);
+	
 	if (cnfbuf) {
 		applog(LOG_NOTICE, "Loaded configuration file %s", cnfbuf);
 		switch (fileconf_load) {
@@ -7494,7 +7523,7 @@ int main(int argc, char *argv[])
 
 #ifdef USE_ICARUS
 
-    applog(LOG_ERR,"[Nimo]Enter USE_ICARUS");
+    applog(LOG_ERR,"[Nimo]Enter USE_ICARUS,opt_scrypt=%d",opt_scrypt);
 
 	if (!opt_scrypt)
 		icarus_drv.drv_detect();
@@ -7861,6 +7890,11 @@ begin_bench:
 		}
 		pool = select_pool(lagging);
 retry:
+
+==============================================
+		applog(LOG_ERR,"[Nimo]main(),has_stratum=%d or has_gbt=%d?",pool->has_stratum,pool->has_gbt);
+==============================================	
+	
 		if (pool->has_stratum) {
 			while (!pool->stratum_active || !pool->stratum_notify) {
 				struct pool *altpool = select_pool(true);
