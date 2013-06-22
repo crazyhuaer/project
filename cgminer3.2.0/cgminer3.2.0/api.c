@@ -3948,9 +3948,9 @@ void api(int api_thr_id)
 		addrok = false;
 		group = NOPRIVGROUP;
 
-==============================================
+/*==============================================*/
 	applog(LOG_ERR,"[Nimo]api(6)_opt_api_allow=%s,connectaddr=%s",opt_api_allow,connectaddr);
-==============================================
+/*==============================================*/
 		
 		if (opt_api_allow) {
 			int client_ip = htonl(cli.sin_addr.s_addr);
@@ -3974,9 +3974,9 @@ void api(int api_thr_id)
 		if (addrok) {
 			n = recv(c, &buf[0], TMPBUFSIZ-1, 0);
 
-==============================================
-	applog(LOG_ERR,"[Nimo]n=%d,buf[0]=%s",n,&buf[0]);
-==============================================
+/*==============================================*/	
+            applog(LOG_ERR,"[Nimo]n=%d,buf[0]=%s",n,&buf[0]);
+/*==============================================*/
 			
 			if (SOCKETFAIL(n))
 				buf[0] = '\0';

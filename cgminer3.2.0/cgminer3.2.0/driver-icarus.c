@@ -740,6 +740,7 @@ static bool icarus_detect_one(struct libusb_device *dev, struct usb_find_devices
 	struct cgpu_info *icarus;
 	int ret, err, amount, tries;
 	bool ok;
+	int  i = 0;
 
 	icarus = calloc(1, sizeof(struct cgpu_info));
 	if (unlikely(!icarus))
@@ -771,7 +772,14 @@ static bool icarus_detect_one(struct libusb_device *dev, struct usb_find_devices
 		if (err != LIBUSB_SUCCESS || amount != sizeof(ob_bin))
 			continue;
 
-        applog(LOG_ERR,"[Nimo][icarus_detect_one]ob_bin=%s",ob_bin);
+/****************************/
+        applog(LOG_ERR,"[Nimo][icarus_detect_one]usb_write=%d,ob_bin=%s",err,(char *)ob_bin);
+/****************************/
+
+        for(i =0; i < 64; i++){
+            printf("%x",(unsigned int)(ob_bin[i]));
+        }
+        printf("\n");	
 		
 		memset(nonce_bin, 0, sizeof(nonce_bin));
 		ret = icarus_get_nonce(icarus, nonce_bin, &tv_start, &tv_finish, NULL, 100);
@@ -850,6 +858,7 @@ shin:
 
 static void icarus_detect()
 {
+	applog(LOG_NOTICE,"[Nimo][icarus_detect]enter.");
 	usb_detect(&icarus_drv, icarus_detect_one);
 }
 
@@ -888,6 +897,7 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 	int64_t estimate_hashes;
 	uint32_t values;
 	int64_t hash_count_range;
+	
 
 	// Device is gone
 	if (icarus->usbinfo.nodev)
@@ -906,7 +916,12 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 
 	err = usb_write(icarus, (char *)ob_bin, sizeof(ob_bin), &amount, C_SENDWORK);
 
-	applog(LOG_ERR,"[Nimo][icarus_scanhash]usb write ob_bin=%s",ob_bin);
+	applog(LOG_ERR,"[Nimo][icarus_scanhash]usb write ob_bin=");
+
+    for(i =0; i < 64; i++){
+        printf("%x",(unsigned int)(ob_bin[i]));
+    }
+    printf("\n");
 
 	if (err < 0 || amount != sizeof(ob_bin)) {
 		applog(LOG_ERR, "%s%i: Comms error (werr=%d amt=%d)",
@@ -933,9 +948,9 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 	work->blk.nonce = 0xffffffff;
 
 	
-    applog(LOG_ERR,"[Nimo][icarus_scanhash]icarus_get_nonce nonce_bin=%s,
-		            mean icarus fpga return the code is %s",nonce_bin,nonce_bin);
-
+    applog(LOG_ERR,"[Nimo][icarus_scanhash]icarus_get_nonce nonce_bin=%x%x%x%x,"
+		            "mean icarus fpga return the code",(unsigned int)nonce_bin[0],
+		            (unsigned int)nonce_bin[1],(unsigned int)nonce_bin[2],(unsigned int)nonce_bin[3]);
 	
 	// aborted before becoming idle, get new work
 	if (ret == ICA_NONCE_TIMEOUT || ret == ICA_NONCE_RESTART) {
@@ -965,7 +980,7 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 	nonce = htobe32(nonce);
 	curr_hw_errors = icarus->hw_errors;
 
-    applog(LOG_ERR,"[Nimo][icarus_scanhash]submit_nonce nonce=%s",nonce);
+    applog(LOG_ERR,"[Nimo][icarus_scanhash]submit_nonce nonce=%u",nonce);
 	
 	submit_nonce(thr, work, nonce);
 	was_hw_error = (curr_hw_errors > icarus->hw_errors);

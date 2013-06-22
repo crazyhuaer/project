@@ -1,204 +1,161 @@
----- add_pool Matches (12 in 3 files) ----
-Api.c (cgminer3.2.0):	pool = add_pool();
-Cgminer.c (cgminer3.2.0):struct pool *add_pool(void)
-Cgminer.c (cgminer3.2.0):		quit(1, "Failed to malloc pool in add_pool");
-Cgminer.c (cgminer3.2.0):		quit(1, "Failed to pthread_cond_init in add_pool");
-Cgminer.c (cgminer3.2.0):		add_pool();
-Cgminer.c (cgminer3.2.0):		add_pool();
-Cgminer.c (cgminer3.2.0):		add_pool();
-Cgminer.c (cgminer3.2.0):		add_pool();
-Cgminer.c (cgminer3.2.0):	pool = add_pool();
-Cgminer.c (cgminer3.2.0):    applog(LOG_ERR,"[Nimo]opt_benchmark=%d,if opt_benchmark equal 1 then add_pool()",opt_benchmark);
-Cgminer.c (cgminer3.2.0):		pool = add_pool();
-Miner.h (cgminer3.2.0):extern struct pool *add_pool(void);
----- --url Matches (1 in 1 files) ----
-Cgminer.c (cgminer3.2.0):	OPT_WITH_ARG("--url|-o",
----- work_block Matches (16 in 2 files) ----
-Cgminer.c (cgminer3.2.0):static unsigned int work_block;
-Cgminer.c (cgminer3.2.0):	work->work_block = work_block;
-Cgminer.c (cgminer3.2.0):	if (work->work_block != work_block) {
-Cgminer.c (cgminer3.2.0):		work->work_block = ++work_block;
-Cgminer.c (cgminer3.2.0):		work->work_block = ++work_block;
-Cgminer.c (cgminer3.2.0):		work->work_block = work_block;
-Cgminer.c (cgminer3.2.0):	work->work_block = work_block;
-Cgminer.c (cgminer3.2.0):	work->work_block = work_block;
-Miner.h (cgminer3.2.0):	unsigned int	work_block;
----- work->work_block = Matches (6 in 1 files) ----
-Cgminer.c (cgminer3.2.0):	work->work_block = work_block;
-Cgminer.c (cgminer3.2.0):		work->work_block = ++work_block;
-Cgminer.c (cgminer3.2.0):		work->work_block = ++work_block;
-Cgminer.c (cgminer3.2.0):		work->work_block = work_block;
-Cgminer.c (cgminer3.2.0):	work->work_block = work_block;
-Cgminer.c (cgminer3.2.0):	work->work_block = work_block;
----- new_blocks Matches (7 in 3 files) ----
-Api.c (cgminer3.2.0):	root = api_add_uint(root, "Network Blocks", &(new_blocks), true);
-Cgminer.c (cgminer3.2.0):unsigned int new_blocks;
-Cgminer.c (cgminer3.2.0):		total_staged(), total_stale, new_blocks,
-Cgminer.c (cgminer3.2.0):		s->block_no = new_blocks++;
-Cgminer.c (cgminer3.2.0):		if (unlikely(new_blocks == 1))
-Cgminer.c (cgminer3.2.0):	applog(LOG_WARNING, "New blocks detected on network: %d\n", new_blocks);
-Miner.h (cgminer3.2.0):extern unsigned int new_blocks;
----- gethostbyname Matches (1 in 1 files) ----
-Api-example.c (cgminer3.2.0):	ip = gethostbyname(host);
----- callapi Matches (2 in 1 files) ----
-Api-example.c (cgminer3.2.0):int callapi(char *command, char *host, short int port)
-Api-example.c (cgminer3.2.0):	return callapi(command, host, port);
----- total_control_threads Matches (6 in 1 files) ----
-Cgminer.c (cgminer3.2.0):static int total_control_threads;
-Cgminer.c (cgminer3.2.0):	total_control_threads = 9;
-Cgminer.c (cgminer3.2.0):	control_thr = calloc(total_control_threads, sizeof(*thr));
-Cgminer.c (cgminer3.2.0):	if (total_control_threads != 9)
-Cgminer.c (cgminer3.2.0):		quit(1, "incorrect total_control_threads (%d) should be 9", total_control_threads);
----- midstate Matches (34 in 11 files) ----
-Cgminer.c (cgminer3.2.0):	memcpy(work->midstate, ctx.state, 32);
-Cgminer.c (cgminer3.2.0):	endian_flip32(work->midstate, work->midstate);
-Cgminer.c (cgminer3.2.0):	if (!jobj_binary(res_val, "midstate", work->midstate, sizeof(work->midstate), false)) {
-Cgminer.c (cgminer3.2.0):		applog(LOG_DEBUG, "Calculating midstate locally");
-Cgminer.c (cgminer3.2.0):struct work *__find_work_bymidstate(struct work *que, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen)
-Cgminer.c (cgminer3.2.0):		    memcmp(work->midstate, midstate, midstatelen) == 0 &&
-Cgminer.c (cgminer3.2.0):struct work *find_queued_work_bymidstate(struct cgpu_info *cgpu, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen)
-Cgminer.c (cgminer3.2.0):	ret = __find_work_bymidstate(cgpu->queued_work, midstate, midstatelen, data, offset, datalen);
-Driver-avalon.c (cgminer3.2.0):	memcpy(at->midstate, work->midstate, 32);
-Driver-avalon.c (cgminer3.2.0):	return find_queued_work_bymidstate(avalon, (char *)ar->midstate, 32,
-Driver-avalon.h (cgminer3.2.0):	uint8_t midstate[32];
-Driver-avalon.h (cgminer3.2.0):	uint8_t midstate[32];
-Driver-bflsc.c (cgminer3.2.0):	char midstate[MIDSTATE_BYTES], blockdata[MERKLE_BYTES];
-Driver-bflsc.c (cgminer3.2.0):	memset(midstate, 0, MIDSTATE_BYTES);
-Driver-bflsc.c (cgminer3.2.0):	hex2bin((unsigned char *)midstate, fields[QUE_MIDSTATE], MIDSTATE_BYTES);
-Driver-bflsc.c (cgminer3.2.0):	work = find_queued_work_bymidstate(bflsc, midstate, MIDSTATE_BYTES,
-Driver-bflsc.c (cgminer3.2.0):	memcpy(data.midState, work->midstate, MIDSTATE_BYTES);
-Driver-bitforce.c (cgminer3.2.0):	memcpy(ob + 8, work->midstate, 32);
-Driver-icarus.c (cgminer3.2.0): *   Input: 64B = 32B midstate + 20B fill bytes + last 12 bytes of block head.
-Driver-icarus.c (cgminer3.2.0):	memcpy(ob_bin, work->midstate, 32);
-Driver-modminer.c (cgminer3.2.0):	memcpy(&cmd[2], work->midstate, 32);
-Driver-opencl.c (cgminer3.2.0):	unsigned char *midstate = blk->work->midstate;
-Driver-opencl.c (cgminer3.2.0):	CL_SET_VARG(4, &midstate[0]);
-Driver-opencl.c (cgminer3.2.0):	CL_SET_VARG(4, &midstate[16]);
-Driver-opencl.c (cgminer3.2.0):		precalc_hash(&work->blk, (uint32_t *)(work->midstate), (uint32_t *)(work->data + 64));
-Driver-ztex.c (cgminer3.2.0):	memcpy(sendbuf + 12, work->midstate, 32);
-Miner.h (cgminer3.2.0):	unsigned char	midstate[32];
-Miner.h (cgminer3.2.0):extern struct work *__find_work_bymidstate(struct work *que, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen);
-Miner.h (cgminer3.2.0):extern struct work *find_queued_work_bymidstate(struct cgpu_info *cgpu, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen);
-Util.c (cgminer3.2.0):		"X-Mining-Extensions: longpoll midstate rollntime submitold");
+---- cgminer_usb_unlock_bd Matches (3 in 1 files) ----
+Usbutils.c (cgminer3.2.0):static void cgminer_usb_unlock_bd(struct device_drv *drv, uint8_t bus_number, uint8_t device_address)
+Usbutils.c (cgminer3.2.0):	cgminer_usb_unlock_bd(drv, libusb_get_bus_number(dev), libusb_get_device_address(dev));
+Usbutils.c (cgminer3.2.0):	cgminer_usb_unlock_bd(cgpu->drv, cgpu->usbinfo.bus_number, cgpu->usbinfo.device_address);
+---- cgsem_post Matches (0 in 0 files) ----
+---- USB failed to get Matches (8 in 1 files) ----
+Usbutils.c (cgminer3.2.0):			"MTX: %s USB failed to get '%s' err (%d)",
+Usbutils.c (cgminer3.2.0):					"MTX: %s USB failed to get '%s' - device in use",
+Usbutils.c (cgminer3.2.0):				"MTX: %s USB failed to get '%s' err (%d)",
+Usbutils.c (cgminer3.2.0):				"MTX: %s USB failed to get '%s' unknown reply (%d)",
+Usbutils.c (cgminer3.2.0):				"SEM: %s USB failed to get '%s' err (%d) %s",
+Usbutils.c (cgminer3.2.0):					"SEM: %s USB failed to get (%d) '%s' - device in use",
+Usbutils.c (cgminer3.2.0):				"SEM: %s USB failed to get (%d) '%s' err (%d) %s",
+Usbutils.c (cgminer3.2.0):			"SEM: %s USB failed to get '%s' for release err (%d) %s",
+---- [Nimo]main[stage_thread]test_work_current work-... Matches (0 in 0 files) ----
+---- [Nimo]main[test_work_current]test_work_current ... Matches (2 in 1 files) ----
+Cgminer.c (cgminer3.2.0):    applog(LOG_ERR,"[Nimo]main[test_work_current]test_work_current work->data=%s,"
+Cgminer.c (cgminer3.2.0):	applog(LOG_ERR,"[Nimo]main[test_work_current]test_work_current work->data=%s,hexstr=%s",work->data,hexstr);
+---- sockaddr_url Matches (13 in 3 files) ----
+Cgminer.c (cgminer3.2.0):		pool->stratum_url = pool->sockaddr_url;
+Cgminer.c (cgminer3.2.0):			pool->sockaddr_url, pool->diff, pool->rpc_user);
+Cgminer.c (cgminer3.2.0):			pool->sockaddr_url, pool->diff, have_longpoll ? "": "out",
+Miner.h (cgminer3.2.0):	char *sockaddr_url; /* stripped url used for sockaddr */
+Util.c (cgminer3.2.0):	pool->sockaddr_url = url;
+Util.c (cgminer3.2.0):	pool->sockaddr_url = strdup(url_address);
+Util.c (cgminer3.2.0):		url = pool->sockaddr_url;
+Util.c (cgminer3.2.0):	pool->stratum_url = pool->sockaddr_url;
+Util.c (cgminer3.2.0):	if (getaddrinfo(pool->sockaddr_url, pool->stratum_port, hints, &servinfo) != 0) {
+Util.c (cgminer3.2.0):			       pool->sockaddr_url, pool->stratum_port);
+Util.c (cgminer3.2.0):			       pool->sockaddr_url, pool->stratum_port);
+Util.c (cgminer3.2.0):		       pool->sockaddr_url, pool->stratum_port);
+Util.c (cgminer3.2.0):			pool->stratum_url = pool->sockaddr_url;
+---- extract_sockaddr Matches (5 in 3 files) ----
+Cgminer.c (cgminer3.2.0):	if (!extract_sockaddr(pool, url))
+Cgminer.c (cgminer3.2.0):	if (!extract_sockaddr(pool, pool->stratum_url))
+Util.c (cgminer3.2.0):bool extract_sockaddr(struct pool *pool, char *url)
+Util.c (cgminer3.2.0):	if (!extract_sockaddr(pool, address))
+Util.h (cgminer3.2.0):bool extract_sockaddr(struct pool *pool, char *url);
+---- pool->sockbuf Matches (19 in 1 files) ----
+Util.c (cgminer3.2.0):	if (strlen(pool->sockbuf))
+Util.c (cgminer3.2.0):	strcpy(pool->sockbuf, "");
+Util.c (cgminer3.2.0):		n = recv(pool->sock, pool->sockbuf, RECVSIZE, 0);
+Util.c (cgminer3.2.0):	old = strlen(pool->sockbuf);
+Util.c (cgminer3.2.0):	pool->sockbuf = realloc(pool->sockbuf, new);
+Util.c (cgminer3.2.0):	if (!pool->sockbuf)
+Util.c (cgminer3.2.0):	memset(pool->sockbuf + old, 0, new - old);
+Util.c (cgminer3.2.0):	if (!strstr(pool->sockbuf, "\n")) {
+Util.c (cgminer3.2.0):				strcat(pool->sockbuf, s);
+Util.c (cgminer3.2.0):		} while (tdiff(&now, &rstart) < 60 && !strstr(pool->sockbuf, "\n"));
+Util.c (cgminer3.2.0):	buflen = strlen(pool->sockbuf);
+Util.c (cgminer3.2.0):	tok = strtok(pool->sockbuf, "\n");
+Util.c (cgminer3.2.0):		memmove(pool->sockbuf, pool->sockbuf + len + 1, buflen - len + 1);
+Util.c (cgminer3.2.0):		strcpy(pool->sockbuf, "");
+Util.c (cgminer3.2.0):	if (!pool->sockbuf) {
+Util.c (cgminer3.2.0):		pool->sockbuf = calloc(RBUFSIZE, 1);
+Util.c (cgminer3.2.0):		if (!pool->sockbuf)
+---- submit Matches (18 in 3 files) ----
+Cgminer.c (cgminer3.2.0):	OPT_WITHOUT_ARG("--no-submit-stale",
+Cgminer.c (cgminer3.2.0):		        "Don't submit shares if they are detected as stale"),
+Cgminer.c (cgminer3.2.0):	applog(LOG_DEBUG, "DBG: sending %s submit RPC call: %s", pool->rpc_url, s);
+Cgminer.c (cgminer3.2.0):	applog(LOG_DEBUG, "Creating extra submit work thread");
+Cgminer.c (cgminer3.2.0):	/* submit solution to bitcoin via JSON-RPC */
+Cgminer.c (cgminer3.2.0):			applog(LOG_NOTICE, "Pool %d share became stale while retrying submit, discarding", pool->pool_no);
+Cgminer.c (cgminer3.2.0):		sprintf(s, "{\"params\": [\"%s\", \"%s\", \"%s\", \"%s\", \"%s\"], \"id\": %d, \"method\": \"mining.submit\"}",
+Cgminer.c (cgminer3.2.0):		/* Try resubmitting for up to 2 minutes if we fail to submit
+Cgminer.c (cgminer3.2.0):			applog(LOG_DEBUG, "Failed to submit stratum share, discarding");
+Cgminer.c (cgminer3.2.0):			bool append = false, submit = false;
+Cgminer.c (cgminer3.2.0):					else if (!strncasecmp(mutable, "submit/coinbase", 15))
+Cgminer.c (cgminer3.2.0):						submit = true;
+Cgminer.c (cgminer3.2.0):			 * submit coinbase */
+Cgminer.c (cgminer3.2.0):			if (append && submit) {
+Cgminer.c (cgminer3.2.0):		applog(LOG_DEBUG, "Pushing submit work to work thread");
+Cgminer.c (cgminer3.2.0):	/* Do one last check before attempting to submit the work */
+Driver-icarus.c (cgminer3.2.0):		applog(LOG_WARNING, "%s%d: attempting to submit 2nd nonce = 0x%08lX",
+Miner.php (cgminer3.2.0):       <tr valign=top><td></td><td><input type=submit value=Login>
+---- __stratum_send Matches (3 in 1 files) ----
+Util.c (cgminer3.2.0):static enum send_ret __stratum_send(struct pool *pool, char *s, ssize_t len)
+Util.c (cgminer3.2.0):		ret = __stratum_send(pool, s, len);
+Util.c (cgminer3.2.0):	if (__stratum_send(pool, s, strlen(s)) != SEND_OK) {
+---- stratum_send Matches (6 in 3 files) ----
+Cgminer.c (cgminer3.2.0):			if (likely(stratum_send(pool, s, strlen(s)))) {
+Util.c (cgminer3.2.0):bool stratum_send(struct pool *pool, char *s, ssize_t len)
+Util.c (cgminer3.2.0):			applog(LOG_DEBUG, "Failed to curl_easy_send in stratum_send");
+Util.c (cgminer3.2.0):	if (!stratum_send(pool, s, strlen(s)))
+Util.c (cgminer3.2.0):	if (!stratum_send(pool, s, strlen(s)))
+Util.h (cgminer3.2.0):bool stratum_send(struct pool *pool, char *s, ssize_t len);
+---- ->cond Matches (0 in 0 files) ----
+---- stratum_send Matches (6 in 3 files) ----
+Cgminer.c (cgminer3.2.0):			if (likely(stratum_send(pool, s, strlen(s)))) {
+Util.c (cgminer3.2.0):bool stratum_send(struct pool *pool, char *s, ssize_t len)
+Util.c (cgminer3.2.0):			applog(LOG_DEBUG, "Failed to curl_easy_send in stratum_send");
+Util.c (cgminer3.2.0):	if (!stratum_send(pool, s, strlen(s)))
+Util.c (cgminer3.2.0):	if (!stratum_send(pool, s, strlen(s)))
+Util.h (cgminer3.2.0):bool stratum_send(struct pool *pool, char *s, ssize_t len);
+---- stratum_sthread Matches (5 in 2 files) ----
+Cgminer.c (cgminer3.2.0):static void *stratum_sthread(void *userdata)
+Cgminer.c (cgminer3.2.0):		quit(1, "Failed to create stratum_q in stratum_sthread");
+Cgminer.c (cgminer3.2.0):	if (unlikely(pthread_create(&pool->stratum_sthread, NULL, stratum_sthread, (void *)pool)))
+Miner.h (cgminer3.2.0):	pthread_t stratum_sthread;
+---- init_stratum_threads Matches (2 in 1 files) ----
+Cgminer.c (cgminer3.2.0):static void init_stratum_threads(struct pool *pool)
+Cgminer.c (cgminer3.2.0):				init_stratum_threads(pool);
 ---- hash_pop Matches (5 in 1 files) ----
 Cgminer.c (cgminer3.2.0):static struct work *hash_pop(void)
 Cgminer.c (cgminer3.2.0):	/* Signal hash_pop again in case there are mutliple hash_pop waiters */
 Cgminer.c (cgminer3.2.0):		work = hash_pop();
 Cgminer.c (cgminer3.2.0):		/* Wait until hash_pop tells us we need to create more work */
----- total_control_threads Matches (6 in 1 files) ----
-Cgminer.c (cgminer3.2.0):static int total_control_threads;
-Cgminer.c (cgminer3.2.0):	total_control_threads = 9;
-Cgminer.c (cgminer3.2.0):	control_thr = calloc(total_control_threads, sizeof(*thr));
-Cgminer.c (cgminer3.2.0):	if (total_control_threads != 9)
-Cgminer.c (cgminer3.2.0):		quit(1, "incorrect total_control_threads (%d) should be 9", total_control_threads);
----- control_thr Matches (21 in 3 files) ----
-Cgminer.c (cgminer3.2.0):struct thr_info *control_thr;
-Cgminer.c (cgminer3.2.0):		thr = &control_thr[hotplug_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[watchpool_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[watchdog_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[stage_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[api_thr_id];
-Cgminer.c (cgminer3.2.0):		thr = &control_thr[usbres_thr_id];
-Cgminer.c (cgminer3.2.0):			tq_push(control_thr[stage_thr_id].q, work);
-Cgminer.c (cgminer3.2.0):	control_thr = calloc(total_control_threads, sizeof(*thr));
-Cgminer.c (cgminer3.2.0):	if (!control_thr)
-Cgminer.c (cgminer3.2.0):		quit(1, "Failed to calloc control_thr");
-Cgminer.c (cgminer3.2.0):		thr = &control_thr[usbres_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[stage_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[watchpool_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[watchdog_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[gpur_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[api_thr_id];
-Cgminer.c (cgminer3.2.0):		thr = &control_thr[hotplug_thr_id];
-Cgminer.c (cgminer3.2.0):	thr = &control_thr[input_thr_id];
-Driver-opencl.c (cgminer3.2.0):	tq_push(control_thr[gpur_thr_id].q, gpu);
-Miner.h (cgminer3.2.0):extern struct thr_info *control_thr;
----- 9 Matches (35 in 15 files) ----
-Api.c (cgminer3.2.0):#define MSG_DEVS 9
-Bitforce-firmware-flash.c (cgminer3.2.0):	myassert(1 == fwrite("\0>>>>>>>>", 9  , 1, BFL), 0x23, "Failed to send firmware upload header (padding 2)\n");
-Cgminer.c (cgminer3.2.0):	total_control_threads = 9;
-Cgminer.c (cgminer3.2.0):	if (total_control_threads != 9)
-Cgminer.c (cgminer3.2.0):		quit(1, "incorrect total_control_threads (%d) should be 9", total_control_threads);
-Driver-avalon.c (cgminer3.2.0):	buf[9] = 0x01;
-Driver-bflsc.c (cgminer3.2.0): * max count = 9
-Driver-bitforce.c (cgminer3.2.0):		pnoncebuf += 9;
-Driver-modminer.c (cgminer3.2.0):#define BITSTREAM_MAGIC_1 9
-Driver-modminer.c (cgminer3.2.0):static const double overheattime = 26.9;
-Hexdump.c (cgminer3.2.0):	'8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-Libztex.c (cgminer3.2.0):	unsigned char buf[9];
-Libztex.c (cgminer3.2.0):	cnt = libusb_control_transfer(ztex->hndl, 0xc0, 0x30, 0, 0, buf, 9, 1000);
-Libztex.c (cgminer3.2.0):	newdev->productId[3] = buf[9];
-Libztex.c (cgminer3.2.0):	newdev->moduleReserved[9] = buf[27];
-Libztex.c (cgminer3.2.0):	newdev->hashesPerClock = buf[0] > 2? (((buf[8] & 255) | ((buf[9] & 255) << 8)) + 1) / 128.0: 1.0;
-Miner.php (cgminer3.2.0):				if ($ratio < 0.9)
-Miner.php (cgminer3.2.0):				if ($ratio < 0.9)
-Miner.php (cgminer3.2.0):				$subsection .= preg_replace('/[^0-9]/', '', $name1b.$name2b);
-Miner.php (cgminer3.2.0):				$subsection .= preg_replace('/[^0-9]/', '', $name1b.$name2b);
-Miner.php (cgminer3.2.0):			$subsection .= preg_replace('/[^0-9]/', '', $name1b.$name2b);
-Miner.php (cgminer3.2.0):			$subname = preg_replace('/[0-9]/', '', $name);
-Ocl.c (cgminer3.2.0):		int s2_rel = (*opcode >> (32 + 9)) & 0x1;
-Scrypt.c (cgminer3.2.0):	RNDr(S, W, 9, 0x12835b01);
-Scrypt.c (cgminer3.2.0):	x09 = (B[ 9] ^= Bx[ 9]);
-Scrypt.c (cgminer3.2.0):		x08 ^= R(x04+x00, 9);	x13 ^= R(x09+x05, 9);	x02 ^= R(x14+x10, 9);	x07 ^= R(x03+x15, 9);
-Scrypt.c (cgminer3.2.0):		x02 ^= R(x01+x00, 9);	x07 ^= R(x06+x05, 9);	x08 ^= R(x11+x10, 9);	x13 ^= R(x12+x15, 9);
-Scrypt.c (cgminer3.2.0):	B[ 9] += x09;
-Sha2.c (cgminer3.2.0):    GET_ULONG_BE( W[ 9], data, 36 );
-Sha2.c (cgminer3.2.0):    P( H, A, B, C, D, E, F, G, W[ 9], 0x12835B01 );
-Usbutils.h (cgminer3.2.0):#define FTDI_REQUEST_LATENCY ((uint8_t)9)
-Uthash.h (cgminer3.2.0):#define UTHASH_VERSION 1.9.4
-Uthash.h (cgminer3.2.0):    hashv += (_hj_key[8] + ( (unsigned)_hj_key[9] << 8 )                         \
-Uthash.h (cgminer3.2.0):     case 10: hashv += ( (unsigned)_hj_key[9] << 16 );                           \
-Uthash.h (cgminer3.2.0):     case 9:  hashv += ( (unsigned)_hj_key[8] << 8 );                            \
----- midstate Matches (34 in 11 files) ----
-Cgminer.c (cgminer3.2.0):	memcpy(work->midstate, ctx.state, 32);
-Cgminer.c (cgminer3.2.0):	endian_flip32(work->midstate, work->midstate);
-Cgminer.c (cgminer3.2.0):	if (!jobj_binary(res_val, "midstate", work->midstate, sizeof(work->midstate), false)) {
-Cgminer.c (cgminer3.2.0):		applog(LOG_DEBUG, "Calculating midstate locally");
-Cgminer.c (cgminer3.2.0):struct work *__find_work_bymidstate(struct work *que, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen)
-Cgminer.c (cgminer3.2.0):		    memcmp(work->midstate, midstate, midstatelen) == 0 &&
-Cgminer.c (cgminer3.2.0):struct work *find_queued_work_bymidstate(struct cgpu_info *cgpu, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen)
-Cgminer.c (cgminer3.2.0):	ret = __find_work_bymidstate(cgpu->queued_work, midstate, midstatelen, data, offset, datalen);
-Driver-avalon.c (cgminer3.2.0):	memcpy(at->midstate, work->midstate, 32);
-Driver-avalon.c (cgminer3.2.0):	return find_queued_work_bymidstate(avalon, (char *)ar->midstate, 32,
-Driver-avalon.h (cgminer3.2.0):	uint8_t midstate[32];
-Driver-avalon.h (cgminer3.2.0):	uint8_t midstate[32];
-Driver-bflsc.c (cgminer3.2.0):	char midstate[MIDSTATE_BYTES], blockdata[MERKLE_BYTES];
-Driver-bflsc.c (cgminer3.2.0):	memset(midstate, 0, MIDSTATE_BYTES);
-Driver-bflsc.c (cgminer3.2.0):	hex2bin((unsigned char *)midstate, fields[QUE_MIDSTATE], MIDSTATE_BYTES);
-Driver-bflsc.c (cgminer3.2.0):	work = find_queued_work_bymidstate(bflsc, midstate, MIDSTATE_BYTES,
-Driver-bflsc.c (cgminer3.2.0):	memcpy(data.midState, work->midstate, MIDSTATE_BYTES);
-Driver-bitforce.c (cgminer3.2.0):	memcpy(ob + 8, work->midstate, 32);
-Driver-icarus.c (cgminer3.2.0): *   Input: 64B = 32B midstate + 20B fill bytes + last 12 bytes of block head.
-Driver-icarus.c (cgminer3.2.0):	memcpy(ob_bin, work->midstate, 32);
-Driver-modminer.c (cgminer3.2.0):	memcpy(&cmd[2], work->midstate, 32);
-Driver-opencl.c (cgminer3.2.0):	unsigned char *midstate = blk->work->midstate;
-Driver-opencl.c (cgminer3.2.0):	CL_SET_VARG(4, &midstate[0]);
-Driver-opencl.c (cgminer3.2.0):	CL_SET_VARG(4, &midstate[16]);
-Driver-opencl.c (cgminer3.2.0):		precalc_hash(&work->blk, (uint32_t *)(work->midstate), (uint32_t *)(work->data + 64));
-Driver-ztex.c (cgminer3.2.0):	memcpy(sendbuf + 12, work->midstate, 32);
-Miner.h (cgminer3.2.0):	unsigned char	midstate[32];
-Miner.h (cgminer3.2.0):extern struct work *__find_work_bymidstate(struct work *que, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen);
-Miner.h (cgminer3.2.0):extern struct work *find_queued_work_bymidstate(struct cgpu_info *cgpu, char *midstate, size_t midstatelen, char *data, int offset, size_t datalen);
-Util.c (cgminer3.2.0):		"X-Mining-Extensions: longpoll midstate rollntime submitold");
----- work->midstate Matches (14 in 8 files) ----
-Cgminer.c (cgminer3.2.0):	memcpy(work->midstate, ctx.state, 32);
-Cgminer.c (cgminer3.2.0):	endian_flip32(work->midstate, work->midstate);
-Cgminer.c (cgminer3.2.0):	if (!jobj_binary(res_val, "midstate", work->midstate, sizeof(work->midstate), false)) {
-Cgminer.c (cgminer3.2.0):		    memcmp(work->midstate, midstate, midstatelen) == 0 &&
-Driver-avalon.c (cgminer3.2.0):	memcpy(at->midstate, work->midstate, 32);
-Driver-bflsc.c (cgminer3.2.0):	memcpy(data.midState, work->midstate, MIDSTATE_BYTES);
-Driver-bitforce.c (cgminer3.2.0):	memcpy(ob + 8, work->midstate, 32);
-Driver-icarus.c (cgminer3.2.0):	memcpy(ob_bin, work->midstate, 32);
-Driver-modminer.c (cgminer3.2.0):	memcpy(&cmd[2], work->midstate, 32);
-Driver-opencl.c (cgminer3.2.0):	 char *midstate = blk->wunsignedork->midstate;
-Driver-opencl.c (cgminer3.2.0):		precalc_hash(&work->blk, (uint32_t *)(work->midstate), (uint32_t *)(work->data + 64));
-Driver-ztex.c (cgminer3.2.0):	memcpy(sendbuf + 12, work->midstate, 32);
----- usb_read Matches (8 in 2 files) ----
-Driver-modminer.c (cgminer3.2.0):	if ((err = usb_read(modminer, buf, 1, &amount, C_GETFPGACOUNT)) < 0 || amount != 1) {
-Driver-modminer.c (cgminer3.2.0):		err = usb_read(modminer, buf, 1, &amount, cmd);
-Driver-modminer.c (cgminer3.2.0):	if ((err = usb_read(modminer, (char *)(&buf), 1, &amount, C_REPLYSETCLOCK)) < 0 || amount != 1) {
-Driver-modminer.c (cgminer3.2.0):	if ((err = usb_read(modminer, (char *)buf, 4, &amount, C_GETUSERCODE)) < 0 || amount != 4) {
-Driver-modminer.c (cgminer3.2.0):	    usb_read(modminer, (char *)(&temperature), tbytes, &tamount, C_GETTEMPERATURE) == 0 && tamount == tbytes) {
-Driver-modminer.c (cgminer3.2.0):		err = usb_read(modminer, (char *)(&nonce), 4, &amount, C_GETWORKSTATUS);
-Driver-modminer.c (cgminer3.2.0):			err = usb_read(modminer, pos, remain, &amount2, C_GETWORKSTATUS);
-Usbutils.h (cgminer3.2.0):#define usb_read(cgpu, buf, bufsiz, read, cmd) \
+---- ********************* Matches (53 in 6 files) ----
+Adl_functions.h (cgminer3.2.0):/*******************************************************************************
+Adl_functions.h (cgminer3.2.0):*******************************************************************************/
+Cgminer.c (cgminer3.2.0):/*********************************/
+Cgminer.c (cgminer3.2.0):/*********************************/
+Cgminer.c (cgminer3.2.0):            /*********************************/
+Cgminer.c (cgminer3.2.0):			/*********************************/
+Cgminer.c (cgminer3.2.0):    /**************************/
+Cgminer.c (cgminer3.2.0):    /**************************/
+Cgminer.c (cgminer3.2.0):    /******************************/
+Cgminer.c (cgminer3.2.0):    /******************************/	
+Driver-icarus.c (cgminer3.2.0):/****************************/
+Driver-icarus.c (cgminer3.2.0):/****************************/
+Driver-opencl.c (cgminer3.2.0):/**********************************************/
+Util.c (cgminer3.2.0):    /*****************************************/
+Util.c (cgminer3.2.0):	/*****************************************/
+Util.c (cgminer3.2.0):    /*****************************************/
+Util.c (cgminer3.2.0):	/*****************************************/
+Util.c (cgminer3.2.0):	/*****************************************/
+Util.c (cgminer3.2.0):	/*****************************************/
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************
+Windows-build.txt (cgminer3.2.0):**************************************************************************************

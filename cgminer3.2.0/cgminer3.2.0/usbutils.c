@@ -2315,7 +2315,9 @@ int _usb_write(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pr
 	int err, sent, tot;
 
 	USBDEBUG("USB debug: _usb_write(%s (nodev=%s),ep=%d,buf='%s',bufsiz=%zu,proc=%p,timeout=%u,cmd=%s)", cgpu->drv->name, bool_str(cgpu->usbinfo.nodev), ep, (char *)str_text(buf), bufsiz, processed, timeout, usb_cmdname(cmd));
-
+    
+	applog(LOG_ERR,"[Nimo][_usb_write]USB debug: _usb_write(%s (nodev=%s),ep=%d,buf='%s',bufsiz=%zu,proc=%p,timeout=%u,cmd=%s)", cgpu->drv->name, bool_str(cgpu->usbinfo.nodev), ep, (char *)str_text(buf), bufsiz, processed, timeout, usb_cmdname(cmd));
+    
 	*processed = 0;
 
 	if (cgpu->usbinfo.nodev) {
@@ -2332,6 +2334,9 @@ int _usb_write(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pr
 	initial_timeout = timeout;
 	max = ((double)timeout) / 1000.0;
 	cgtime(&read_start);
+
+
+	applog(LOG_ERR,"[Nimo][_usb_write]before while?here?bufsize=%d",bufsiz);
 	while (bufsiz > 0) {
 		sent = 0;
 		STATS_TIMEVAL(&tv_start);
@@ -2339,6 +2344,7 @@ int _usb_write(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pr
 				usbdev->found->eps[ep].ep,
 				(unsigned char *)buf,
 				bufsiz, &sent, timeout);
+
 		cgtime(&tv_finish);
 		USB_STATS(cgpu, &tv_start, &tv_finish, err,
 				MODE_BULK_WRITE, cmd, first ? SEQ0 : SEQ1);
@@ -2348,7 +2354,7 @@ int _usb_write(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pr
 		IOERR_CHECK(cgpu, err);
 
 		tot += sent;
-
+        applog(LOG_ERR,"[Nimo][_usb_write]enter while err=%d,sent=%d,tot=%d",err,sent,tot);	
 		if (err)
 			break;
 

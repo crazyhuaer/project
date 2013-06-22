@@ -416,9 +416,9 @@ json_t *json_rpc_call(CURL *curl, const char *url,
 		goto err_out;
 	}
 	
-==============================================
-	applog(LOG_ERR,"[Nimo]upload_data.buf=%s,all_data.buf=%s",upload_data.buf,all_data.buf);
-==============================================
+/*==============================================*/
+	applog(LOG_ERR,"[Nimo]upload_data.buf=%s,all_data.buf=%s",(char *)upload_data.buf,(char *)all_data.buf);
+/*==============================================*/
 	
 	pool->cgminer_pool_stats.times_sent++;
 	if (curl_easy_getinfo(curl, CURLINFO_SIZE_UPLOAD, &byte_count) == CURLE_OK)
@@ -1637,6 +1637,10 @@ resend:
 
 	sockd = true;
 
+    /*****************************************/
+    applog(LOG_ERR,"[Nimo][initiate_stratum]after setup_stratum_socket recvd=%d",recvd);
+	/*****************************************/
+    
 	if (recvd) {
 		/* Get rid of any crap lying around if we're resending */
 		clear_sock(pool);
@@ -1648,6 +1652,10 @@ resend:
 			sprintf(s, "{\"id\": %d, \"method\": \"mining.subscribe\", \"params\": [\""PACKAGE"/"VERSION"\"]}", swork_id++);
 	}
 
+    /*****************************************/
+    applog(LOG_ERR,"[Nimo][initiate_stratum]send the s=%s",s);
+	/*****************************************/
+	
 	if (__stratum_send(pool, s, strlen(s)) != SEND_OK) {
 		applog(LOG_DEBUG, "Failed to send s in initiate_stratum");
 		goto out;
@@ -1659,6 +1667,11 @@ resend:
 	}
 
 	sret = recv_line(pool);
+
+	/*****************************************/
+	applog(LOG_ERR,"[Nimo][initiate_stratum]recv_data:%s",sret);
+	/*****************************************/
+
 	if (!sret)
 		goto out;
 

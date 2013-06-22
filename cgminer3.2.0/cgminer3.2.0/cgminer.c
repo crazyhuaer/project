@@ -1823,10 +1823,9 @@ static bool work_decode(struct pool *pool, struct work *work, json_t *val)
 		goto out;
 	}
 
-==============================================
-    applog(LOG_ERR,"[Nimo][pool_active/work_decode]pool->has_gbt=%d,
-                    if pool->has_gbt=0,then into getwork_decode,else into gbt_decode",pool->has_gbt);
-==============================================	
+/*==============================================*/
+    applog(LOG_ERR,"[Nimo][pool_active/work_decode]pool->has_gbt=%d,if pool->has_gbt=0,then into getwork_decode,else into gbt_decode",pool->has_gbt);
+/*==============================================*/
 
 	if (pool->has_gbt) {
 		if (unlikely(!gbt_decode(pool, res_val)))
@@ -3294,6 +3293,11 @@ static bool cnx_needed(struct pool *pool);
 
 static void *submit_work_thread(void *userdata)
 {
+
+	//20130618
+	applog(LOG_ERR,"[Nimo][submit_work_thread]Enter submit_work_thread?");
+    //End
+    
 	struct work *work = (struct work *)userdata;
 	struct pool *pool = work->pool;
 	bool resubmit = false;
@@ -3637,16 +3641,21 @@ static bool test_work_current(struct work *work)
 {
 	bool ret = true;
 	char *hexstr;
+	int  i = 0;
 
 	if (work->mandatory)
 		return ret;
     
 	/* Hack to work around dud work sneaking into test */
-
-    applog(LOG_ERR,"[Nimo]main[stage_thread]test_work_current work->data=%s",work->data);
+	applog(LOG_ERR,"[Nimo]main[test_work_current]test_work_current work->data=%s,"
+                    "sizeof(work->data)",work->data,sizeof(work->data));
+    for(i =0; i < 128; i++){
+        printf("%x",(unsigned int)((work->data)[i]));
+    }
+    printf("\n");
 	
 	hexstr = bin2hex(work->data + 8, 18);
-	applog(LOG_ERR,"[Nimo]main[stage_thread]test_work_current work->data=%s,hexstr=%s",work->data,hexstr);
+	applog(LOG_ERR,"[Nimo]main[test_work_current]test_work_current work->data=%s,hexstr=%s",work->data,hexstr);
 	if (!strncmp(hexstr, "000000000000000000000000000000000000", 36))
 		goto out_free;
 
@@ -3778,6 +3787,11 @@ static void *stage_thread(void *userdata)
 static void stage_work(struct work *work)
 {
 	applog(LOG_DEBUG, "Pushing work from pool %d to hash queue", work->pool->pool_no);
+
+/*********************************/
+    applog(LOG_ERR,"[Nimo][stage_work]work->work_block:%d",work_block);
+/*********************************/
+	
 	work->work_block = work_block;
 	test_work_current(work);
 	hash_push(work);
@@ -5095,6 +5109,10 @@ static void *stratum_sthread(void *userdata)
 		while (time(NULL) < sshare->sshare_time + 120) {
 			bool sessionid_match;
 
+            /*********************************/
+            applog(LOG_ERR,"[Nimo][stratum_sthread]s=%s",s);
+			/*********************************/
+
 			if (likely(stratum_send(pool, s, strlen(s)))) {
 				if (pool_tclear(pool, &pool->submit_fail))
 						applog(LOG_WARNING, "Pool %d communication resumed, submitting work", pool->pool_no);
@@ -5191,6 +5209,8 @@ retry_stratum:
 		 * setting/unsetting the active flag */
 		bool init = pool_tset(pool, &pool->stratum_init);
 
+        applog(LOG_NOTICE,"[Nimo][pool_active]pool->has_stratum");
+		
 		if (!init) {
 			bool ret = initiate_stratum(pool) && auth_stratum(pool);
 
@@ -5212,9 +5232,9 @@ retry_stratum:
 	/* Probe for GBT support on first pass */
 	if (!pool->probed && !opt_fix_protocol) {
 		
-==============================================
-		applog(LOG_ERR,"[Nimo]GBT support first pass.!")
-==============================================	
+/*==============================================*/
+		applog(LOG_ERR,"[Nimo]GBT support first pass!");
+/*==============================================*/
 
 		applog(LOG_DEBUG, "Probing for GBT support");
 		val = json_rpc_call(curl, pool->rpc_url, pool->rpc_userpass,
@@ -5236,9 +5256,9 @@ retry_stratum:
 				if (json_is_string(arrval)) {
 					const char *mutable = json_string_value(arrval);
 
-==============================================
-                    applog(LOG_ERR,"[Nimo]mutables:%d:mutable=%s",i,mutable);
-==============================================
+/*==============================================*/                    
+                applog(LOG_ERR,"[Nimo]mutables:%d:mutable=%s",i,mutable);
+/*==============================================*/
 
 					if (!strncasecmp(mutable, "coinbase/append", 15))
 						append = true;
@@ -5267,9 +5287,9 @@ retry_stratum:
 
 	cgtime(&tv_getwork);
 
-==============================================
-		applog(LOG_ERR,"[Nimo]GBT support second pass.!")
-==============================================	
+/*==============================================*/
+		applog(LOG_ERR,"[Nimo]GBT support second pass.!");
+/*==============================================*/
 	
 	val = json_rpc_call(curl, pool->rpc_url, pool->rpc_userpass,
 			    pool->rpc_req, true, false, &rolltime, pool, false);
@@ -5615,6 +5635,11 @@ static struct work *get_work(struct thr_info *thr, const int thr_id)
 
 static void submit_work_async(struct work *work_in, struct timeval *tv_work_found)
 {
+
+    /**************************/
+    applog(LOG_ERR,"[Nimo][submit_work_async]i need to sure enter submit_work_async");
+    /**************************/
+	
 	struct work *work = copy_work(work_in);
 	struct pool *pool = work->pool;
 	pthread_t submit_thread;
@@ -5644,13 +5669,27 @@ static void submit_work_async(struct work *work_in, struct timeval *tv_work_foun
 		work->stale = true;
 	}
 
+    /******************************/
+    applog(LOG_ERR,"[Nimo][submit_work_async]work->stratum:%d",work->stratum);
+    /******************************/	
+
 	if (work->stratum) {
+		
+	//20130618
+	applog(LOG_ERR,"[Nimo][submit_nonce]work->stratum=1?");
+    //End
+    
 		applog(LOG_DEBUG, "Pushing pool %d work to stratum queue", pool->pool_no);
 		if (unlikely(!tq_push(pool->stratum_q, work))) {
 			applog(LOG_DEBUG, "Discarding work from removed pool");
 			free_work(work);
 		}
 	} else {
+
+	//20130618
+	applog(LOG_ERR,"[Nimo][submit_nonce]work->stratum=0?");
+    //End
+    
 		applog(LOG_DEBUG, "Pushing submit work to work thread");
 		if (unlikely(pthread_create(&submit_thread, NULL, submit_work_thread, (void *)work)))
 			quit(1, "Failed to create submit_work_thread");
@@ -5670,6 +5709,10 @@ void inc_hw_errors(struct thr_info *thr)
 /* Returns true if nonce for work was a valid share */
 bool submit_nonce(struct thr_info *thr, struct work *work, uint32_t nonce)
 {
+	//20130618
+	applog(LOG_ERR,"[Nimo][submit_nonce]before submit_work_async");
+    //End
+	
 	uint32_t *work_nonce = (uint32_t *)(work->data + 64 + 12);
 	struct timeval tv_work_found;
 	unsigned char hash2[32];
@@ -7428,8 +7471,8 @@ int main(int argc, char *argv[])
 		quit(1, "Unexpected extra commandline arguments");
 
     
-    applog(LOG_ERR,"[Nimo]config_loaded=%d,if config_loaded equal 0 then read the default config,
-		            else continue...",config_loaded);
+    applog(LOG_ERR,"[Nimo]config_loaded=%d,if config_loaded equal 0 then read the default config,"
+		            "else continue...",config_loaded);
 
 	if (!config_loaded)
 		load_default_config();
@@ -7891,9 +7934,9 @@ begin_bench:
 		pool = select_pool(lagging);
 retry:
 
-==============================================
+/*==============================================*/
 		applog(LOG_ERR,"[Nimo]main(),has_stratum=%d or has_gbt=%d?",pool->has_stratum,pool->has_gbt);
-==============================================	
+/*==============================================*/
 	
 		if (pool->has_stratum) {
 			while (!pool->stratum_active || !pool->stratum_notify) {
