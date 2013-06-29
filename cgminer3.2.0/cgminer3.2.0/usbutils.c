@@ -2074,6 +2074,10 @@ int _usb_read(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pro
 	char *search;
 	int endlen;
 
+	int i;
+
+    applog(LOG_ERR,"[Nimo][_usb_read]usb_read 0");
+
 	// We add 4: 1 for null, 2 for FTDI status and 1 to round to 4 bytes
 	unsigned char usbbuf[USB_MAX_READ+4], *ptr;
 	size_t usbbufread;
@@ -2129,6 +2133,17 @@ int _usb_read(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pro
 			err = libusb_bulk_transfer(usbdev->handle,
 					usbdev->found->eps[ep].ep,
 					ptr, usbbufread, &got, timeout);
+
+			//////////
+			applog(LOG_ERR,"[Nimo][_usb_read]usb_read 1");
+            applog(LOG_ERR,"[Nimo][usb_read]ptr=%s,sizeof(ptr)=%d",ptr,sizeof(ptr));
+			//////////
+
+            for( i =0;i<4;i++){
+                printf("%x",ptr[i]);
+            }
+			printf("\n");
+			
 			cgtime(&tv_finish);
 			USB_STATS(cgpu, &tv_start, &tv_finish, err,
 					MODE_BULK_READ, cmd, first ? SEQ0 : SEQ1);
@@ -2180,6 +2195,10 @@ int _usb_read(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pro
 
 		*processed = tot;
 		memcpy((char *)buf, (const char *)usbbuf, (tot < (int)bufsiz) ? tot + 1 : (int)bufsiz);
+/////////////////////////////
+        applog(LOG_ERR,"[Nimo][_usb_read]usb_read 2");
+        applog(LOG_ERR,"[Nimo][_usb_read]enter while err=%d,got=%d,tot=%d,sizeof(bufsiz),buf=%s",
+                        err,got,tot,buf);
 
 		if (NODEV(err))
 			release_cgpu(cgpu);
@@ -2216,9 +2235,18 @@ int _usb_read(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pro
 		}
 		got = 0;
 		STATS_TIMEVAL(&tv_start);
+
+
+		
 		err = libusb_bulk_transfer(usbdev->handle,
 				usbdev->found->eps[ep].ep,
 				ptr, usbbufread, &got, timeout);
+
+			//////////
+			applog(LOG_ERR,"[Nimo][_usb_read]usb_read 3");
+            applog(LOG_ERR,"[Nimo][usb_read]ptr=%s",ptr);
+			//////////
+		
 		cgtime(&tv_finish);
 		USB_STATS(cgpu, &tv_start, &tv_finish, err,
 				MODE_BULK_READ, cmd, first ? SEQ0 : SEQ1);
@@ -2240,7 +2268,7 @@ int _usb_read(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pro
 		}
 
 		tot += got;
-
+	
 		if (err || readonce)
 			break;
 
@@ -2295,6 +2323,16 @@ int _usb_read(struct cgpu_info *cgpu, int ep, char *buf, size_t bufsiz, int *pro
 
 	*processed = tot;
 	memcpy((char *)buf, (const char *)usbbuf, (tot < (int)bufsiz) ? tot + 1 : (int)bufsiz);
+
+/////////////////////////////
+        applog(LOG_ERR,"[Nimo][_usb_read]usb_read 4");
+        applog(LOG_ERR,"[Nimo][_usb_read]enter while err=%d,got=%d,tot=%d,sizeof(bufsiz),buf=%s",
+                        err,got,tot,sizeof(bufsiz),buf);
+
+        for(i =0; i < 4; i++){
+            printf("%x",(unsigned int)(buf[i]));
+        }
+        printf("\n");	
 
 	if (NODEV(err))
 		release_cgpu(cgpu);

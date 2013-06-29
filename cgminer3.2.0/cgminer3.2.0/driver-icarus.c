@@ -413,6 +413,9 @@ static int icarus_get_nonce(struct cgpu_info *icarus, unsigned char *buf, struct
 	int rc = 0;
 	int read_amount = ICARUS_READ_SIZE;
 	bool first = true;
+	int i;
+
+    applog(LOG_ERR,"[Nimo][icarus_get_nonce]Enter icarus_get_nonce");
 
 	cgtime(tv_start);
 	while (true) {
@@ -420,7 +423,17 @@ static int icarus_get_nonce(struct cgpu_info *icarus, unsigned char *buf, struct
 			return ICA_NONCE_ERROR;
 
 		cgtime(&read_start);
+
+        applog(LOG_ERR,"[Nimo][icarus_get_nonce]Before usb_read_timeout");
+		
 		err = usb_read_timeout(icarus, (char *)buf, read_amount, &amt, ICARUS_WAIT_TIMEOUT, C_GETRESULTS);
+
+        applog(LOG_ERR,"[Nimo][icarus_get_nonce]bufsize=%d,buf=%s",sizeof(buf),buf);
+		for(i=0;i<4;i++){
+            printf("%x ",buf[i]);
+		}
+		printf("\n");
+		
 		cgtime(&read_finish);
 		if (err < 0 && err != LIBUSB_ERROR_TIMEOUT) {
 			applog(LOG_ERR, "%s%i: Comms error (rerr=%d amt=%d)",
@@ -771,7 +784,7 @@ static bool icarus_detect_one(struct libusb_device *dev, struct usb_find_devices
 
 		if (err != LIBUSB_SUCCESS || amount != sizeof(ob_bin))
 			continue;
-
+ls 
 /****************************/
         applog(LOG_ERR,"[Nimo][icarus_detect_one]usb_write=%d,ob_bin=%s",err,(char *)ob_bin);
 /****************************/
@@ -782,9 +795,19 @@ static bool icarus_detect_one(struct libusb_device *dev, struct usb_find_devices
         printf("\n");	
 		
 		memset(nonce_bin, 0, sizeof(nonce_bin));
+		
 		ret = icarus_get_nonce(icarus, nonce_bin, &tv_start, &tv_finish, NULL, 100);
 		if (ret != ICA_NONCE_OK)
 			continue;
+
+/****************************/
+        applog(LOG_ERR,"[Nimo][icarus_detect_one]get fpga return nonce_bin=%s before bin2hex",nonce_bin);
+/****************************/
+
+        for(i =0; i < 4; i++){
+            printf("%x",(unsigned int)(nonce_bin[i]));
+        }
+        printf("\n");
 
 		nonce_hex = bin2hex(nonce_bin, sizeof(nonce_bin));
 		if (strncmp(nonce_hex, golden_nonce, 8) == 0)
@@ -803,7 +826,7 @@ static bool icarus_detect_one(struct libusb_device *dev, struct usb_find_devices
 	if (!ok)
 		goto unshin;
 
-	applog(LOG_DEBUG,
+	applog(LOG_ERR,
 		"Icarus Detect: "
 		"Test succeeded at %s: got %s",
 			devpath, golden_nonce);
@@ -940,6 +963,9 @@ static int64_t icarus_scanhash(struct thr_info *thr, struct work *work,
 
 	/* Icarus will return 4 bytes (ICARUS_READ_SIZE) nonces or nothing */
 	memset(nonce_bin, 0, sizeof(nonce_bin));
+
+    applog(LOG_ERR,"[Nimo][icarus_scanhash] before icarus_get_nonce");
+	
 	ret = icarus_get_nonce(icarus, nonce_bin, &tv_start, &tv_finish, thr, info->read_time);
 	
 	if (ret == ICA_NONCE_ERROR)
